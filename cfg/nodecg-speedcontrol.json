@@ -6,7 +6,7 @@
     "clientSecret": "",
     "redirectURI": "http://localhost:9090/nodecg-speedcontrol/twitchauth",
     "channelName": "",
-    "streamTitle": "🔴 WASD 2022 - Raising money for SpecialEffect: {{game}} - {{category}}",
+    "streamTitle": "🔴 WASD 2023 - Raising money for SpecialEffect: {{game}} - {{category}}",
     "streamDefaultGame": "Games + Demos"
   },
   "schedule": {

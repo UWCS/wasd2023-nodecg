@@ -1,7 +1,7 @@
 {
-  "name": "wasd2022-frontend",
+  "name": "wasd2023-nodecg",
   "version": "0.2.0",
-  "description": "A nodecg broadcast graphics bundle for Warwick's Awesome Speedruns & Demos 2022",
+  "description": "A nodecg broadcast graphics bundle for Warwick's Awesome Speedruns & Demos 2023",
   "main": "index.js",
   "scripts": {
     "build": "rollup --config",

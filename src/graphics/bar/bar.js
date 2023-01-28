@@ -64,7 +64,7 @@ export default class BarComponent {
           m('.bar-logo-wasd.summer-day'),
           m('.bar-logo-wasd.summer-night'),
         ]),
-        m('.bar-name-event', 'WASD 2021'),
+        m('.bar-name-event', 'WASD 2023'),
       ]),
       m('.bar-v-space'),
       m('.bar-donos', [
@@ -78,9 +78,9 @@ export default class BarComponent {
       m(CTA, {
         hold: 30,
         ctas: [
-        'Warwick\'s Awesome Speedruns & Demos Summer 2022',
+        'Warwick\'s Awesome Speedruns & Demos 2023',
         'See the full schedule at warwickspeed.run/schedule',
-        'WASD Summer 2022 is raising money for SpecialEffect',
+        'WASD 2023 is raising money for SpecialEffect',
         'Donate now at warwickspeed.run/donate',
         ]
       }),
