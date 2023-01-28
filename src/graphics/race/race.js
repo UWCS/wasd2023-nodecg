@@ -11,6 +11,7 @@ import RunnersComponent from '../runners/runners.js';
 import CouchComponent from '../couch/couch.js';
 import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
+import { RunGameComponent } from '../common/common.js';
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
@@ -18,20 +19,6 @@ const replicants = {
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
 };
-
-class RunGameComponent {
-  view(vnode) {
-    return m('.run-game', String(vnode.attrs.game));
-  }
-
-  onupdate(vnode) {
-    fitty(vnode.dom, { maxSize: 45, multiline: false });
-  }
-
-  oncreate(vnode) {
-    fitty(vnode.dom, { maxSize: 45, multiline: false });
-  }
-}
 
 class RunDetailsComponent {
   view(vnode) {

@@ -1,6 +1,5 @@
 import m from 'mithril';
 import { get } from 'lodash';
-import fitty from 'fitty';
 
 import '../common.css'
 import './sixteenNine.css';
@@ -10,6 +9,7 @@ import RunnersComponent from '../runners/runners.js';
 import CouchComponent from '../couch/couch.js';
 import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
+import { RunGameComponent, RunDetailsComponent, LogosStack } from '../common/common.js';
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
@@ -17,20 +17,6 @@ const replicants = {
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
 };
-
-class RunGameComponent {
-  view(vnode) {
-    return m('.run-game', String(vnode.attrs.game));
-  }
-
-  onupdate(vnode) {
-    fitty(vnode.dom, { maxSize: 58, multiline: false });
-  }
-
-  oncreate(vnode) {
-    fitty(vnode.dom, { maxSize: 58, multiline: false });
-  }
-}
 
 const sep = '/';
 
@@ -47,27 +33,12 @@ class SixteenNineComponent {
             customData: get(vnode, 'attrs.run.customData'),
           }),
           m(CouchComponent, { customData: get(vnode, 'attrs.run.customData') }),
-          m('.logos', [
-            m('.logo-multi', [
-              m('.logo .wasd-light'),
-              m('.logo .wasd-dark'),
-            ]),
-            m('.logo-multi', [
-              m('.logo .special-effect-white'),
-              m('.logo .special-effect-orange'),
-            ]),
-          ]),
+          m(LogosStack),
         ]),
         m('.bottom',[
           m('.run-details', [
             m(RunGameComponent, { game: get(vnode, 'attrs.run.game') }),
-            m('.run-details-row', [
-              m('div', String(get(vnode, 'attrs.run.system'))),
-              m('div', sep),
-              m('div', String(get(vnode, 'attrs.run.release'))),
-              m('div', sep),
-              m('div', String(get(vnode, 'attrs.run.category'))),
-            ]),
+            m(RunDetailsComponent, { run: get(vnode, 'attrs.run') }),
           ]),
           m('.run-timing', [
             m(TimerComponent, { time: vnode.attrs.time }),

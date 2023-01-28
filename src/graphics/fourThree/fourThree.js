@@ -11,6 +11,7 @@ import RunnersComponent from '../runners/runners.js';
 import CouchComponent from '../couch/couch.js';
 import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
+import { RunGameComponent, RunDetailsComponent, LogosRotate } from '../common/common.js';
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
@@ -18,74 +19,6 @@ const replicants = {
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
 };
-
-class RunGameComponent {
-  view(vnode) {
-    return m('.run-game', String(vnode.attrs.game));
-  }
-
-  onupdate(vnode) {
-    fitty(vnode.dom, { maxSize: 45, multiline: false });
-  }
-
-  oncreate(vnode) {
-    fitty(vnode.dom, { maxSize: 45, multiline: false });
-  }
-}
-
-class RunDetailsComponent {
-  view(vnode) {
-    const system = get(vnode, 'attrs.run.system');
-    const release = get(vnode, 'attrs.run.release');
-    const category = get(vnode, 'attrs.run.category');
-    const sep = '/';
-
-    return  m('.run-details', `${system}  ${sep}  ${release}  ${sep}  ${category}`);
-  }
-
-  onupdate(vnode) {
-    fitty(vnode.dom, { maxSize: 23, multiline: false });
-  }
-
-  oncreate(vnode) {
-    fitty(vnode.dom, { maxSize: 23, multiline: false });
-  }
-}
-
-class Logos {
-  view() {
-    return m('.logos', [
-      m('.logo-multi', [
-        m('.logo .wasd-light'),
-        m('.logo .wasd-dark'),
-      ]),
-      m('.logo-multi', [
-        m('.logo .special-effect-white'),
-        m('.logo .special-effect-orange'),
-      ]),
-    ]);
-  }
-
-  onremove(vnode) {
-    if (this.anim) {
-      this.anim.kill();
-    }
-  }
-
-  oncreate(vnode) {
-    const logos = Array.from(vnode.dom.children);
-
-    const tl = gsap.timeline({ repeat: -1 });
-
-    logos.forEach((logo) => {
-      tl.from(logo, { opacity: 0 });
-      tl.to({}, vnode.attrs.hold || 2, {});
-      tl.to(logo, { opacity: 0 });
-    });
-
-    this.anim = tl;
-  }
-}
 
 class FourThreeComponent {
   view(vnode) {
@@ -109,7 +42,7 @@ class FourThreeComponent {
             customData: get(vnode, 'attrs.run.customData'),
           }),
           m(CouchComponent, { customData: get(vnode, 'attrs.run.customData') }),
-          m(Logos, { hold: 22 }),
+          m(LogosRotate, { hold: 22 }),
         ]),
       ]),
       m(BarComponent, { total: vnode.attrs.total }),
