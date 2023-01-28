@@ -1,6 +1,6 @@
 .current-song-container {
   width: 90%;
-  background-color: var(--text-color-invert);
+  background-color: #22222280;
   border-radius: 7px;
 
   display: flex;
@@ -46,17 +46,7 @@
   top: 0;
   height: 100%;
   width: 25px;
-}
-
-.current-song-details-clip.left {
-  left: 0;
-  background-image: linear-gradient(270deg, transparent, var(--text-color-invert) 50%);
-}
-
-.current-song-details-clip.right {
-  right: 0;
-  background-image: linear-gradient(90deg, transparent, var(--text-color-invert) 50%);
-}
+} 
 
 .current-song-name {
   color: var(--text-color);

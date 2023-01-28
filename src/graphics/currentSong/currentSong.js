@@ -55,8 +55,6 @@ export default class CurrentSongComponent {
         //m('.current-song-name', { key: name }, name),
         m(ScrollText, { cls: '.current-song-name', txt: name, key: name }),
         m(ScrollText, { cls: '.current-song-artist', txt: artist, key: artist }),
-        m('.current-song-details-clip .left', { key: 'clip-left' }),
-        m('.current-song-details-clip .right', { key: 'clip-right' }),
       ]),
     ]);
   }
