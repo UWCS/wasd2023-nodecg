@@ -1,5 +1,6 @@
 import m from 'mithril';
 import { get } from 'lodash';
+import fitty from 'fitty';
 
 import '../common.css'
 import './sixteenNine.css';
@@ -16,6 +17,20 @@ const replicants = {
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
 };
+
+class RunGameComponent {
+  view(vnode) {
+    return m('.run-game', String(vnode.attrs.game));
+  }
+
+  onupdate(vnode) {
+    fitty(vnode.dom, { maxSize: 58, multiline: false });
+  }
+
+  oncreate(vnode) {
+    fitty(vnode.dom, { maxSize: 58, multiline: false });
+  }
+}
 
 const sep = '/';
 
@@ -45,7 +60,7 @@ class SixteenNineComponent {
         ]),
         m('.bottom',[
           m('.run-details', [
-            m('.run-game', String(get(vnode, 'attrs.run.game'))),
+            m(RunGameComponent, { game: get(vnode, 'attrs.run.game') }),
             m('.run-details-row', [
               m('div', String(get(vnode, 'attrs.run.system'))),
               m('div', sep),

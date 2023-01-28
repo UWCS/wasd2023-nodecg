@@ -110,10 +110,12 @@
   border-left: 2px solid var(--spacer-color);
   border-right: 2px solid var(--spacer-color);
   margin-right: 10px;
+  width: calc(100% - 400px);
 }
 
 .run-game {
   font-size: 56px;
+  padding: 0 30px;
 }
 
 .run-details-row {
@@ -130,7 +132,7 @@
 }
 
 .run-timing {
-  width: 500px;
+  width: 400px;
 }
 
 .estimate {
