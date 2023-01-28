@@ -6,12 +6,14 @@ import '../common.css';
 import './break.css';
 
 import BeachBackground from '../beach/beach.js';
+import CurrentSongComponent from '../currentSong/currentSong.js';
 import BarComponent from '../bar/bar.js';
 import { nextRuns } from '../nextRuns/nextRuns.js';
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
   runArray: NodeCG.Replicant('runDataArray', 'nodecg-speedcontrol'),
+  currentSong: NodeCG.Replicant('currentSong', 'ncg-spotify'),
   countdown: NodeCG.Replicant('countdown', 'wasd'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
@@ -147,7 +149,8 @@ class BreakComponent {
             m('.countdown-container', [
               m('.countdown-label', 'BACK SOON'),
               m('.countdown-time', vnode.attrs.countdown.display),
-            ])
+            ]),
+            m(CurrentSongComponent, vnode.attrs.currentSong),
           ]),
           m('.break-v-space'),
           m('.break-right', [
@@ -175,6 +178,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
   m.mount(document.body, {
     view: () => {
       return m(BreakComponent, {
+        currentSong: replicants.currentSong.value,
         total: Math.floor(replicants.total.value),
         countdown: replicants.countdown.value,
         backgroundModeRep: replicants.backgroundMode,
