@@ -74,13 +74,13 @@
 }
 
 .logo.special-effect-white {
-  background-image: url('../assets/specialeffect-proud-white.png');
+  background-image: url('../assets/specialeffect-white.png');
   opacity: var(--night-element-opacity);
   width: 350px;
 }
 
 .logo.special-effect-orange {
-  background-image: url('../assets/specialeffect-proud-white.png');
+  background-image: url('../assets/specialeffect-white.png');
   opacity: var(--day-element-opacity);
   width: 350px;
 }
