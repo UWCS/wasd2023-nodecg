@@ -81,9 +81,10 @@ export class LogosComponent {
         const w = vnode.dom.offsetWidth;
         const h = vnode.dom.offsetHeight;
 
-        if (h < 100) gsap.set(".logos", { display: "none" });
+        if (h < 100) gsap.set(".logo-multi", { display: "none" });
+        else gsap.set(".logo-multi", { display: "flex" });
         
-        if (h * 1.0 / w > 1.25) {
+        if (h > 400) {
             this.end(vnode);
         } else {
             this.start(vnode);

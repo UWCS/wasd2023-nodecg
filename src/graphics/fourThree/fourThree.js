@@ -33,8 +33,6 @@ class FourThreeComponent {
             customData: get(vnode, 'attrs.run.customData'),
           }),
           m(CouchComponent, { customData: get(vnode, 'attrs.run.customData') }),
-          m(LogosComponent),
-
           m('.run-details', [
             m(RunGameComponent, { game: get(vnode, 'attrs.run.game') }),
             m(RunDetailsComponent, { run: get(vnode, 'attrs.run') }),
@@ -43,6 +41,7 @@ class FourThreeComponent {
             m(TimerComponent, { time: vnode.attrs.time }),
             m('.estimate', `Estimate: ${get(vnode, 'attrs.run.estimate')}`),
           ]),
+          m(LogosComponent),
         ]),
       ]),
       m(BarComponent, { total: vnode.attrs.total }),
