@@ -31,12 +31,12 @@ export default class CouchComponent {
       { name: get(vnode, 'attrs.customData.c3Name'), pronouns: get(vnode, 'attrs.customData.c3Pronouns') },
     ];
 
-    if (!(couch[0].name || couch[1].name)) {
-      return null;
-    }
+    const num = couch.filter(c => c.name)
+    if (num == 0) return null;
+    // const plural = num > 1;
 
     return m('.couch-container', [
-      m('.couch-label', 'COMMENTATORS'),
+      // m('.couch-label', plural ? 'Commentators' : 'Commentator'),
       ...couch.map((c) => m(CouchRow, c)),
     ]);
   }
