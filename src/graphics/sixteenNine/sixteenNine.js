@@ -19,8 +19,6 @@ const replicants = {
   camNum: NodeCG.Replicant('camnum', 'wasd'),
 };
 
-const sep = '/';
-
 class SixteenNineComponent {
   view(vnode) {
     return m('.graphic .fullscreen', [
