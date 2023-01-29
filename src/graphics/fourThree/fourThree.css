@@ -9,6 +9,16 @@
   width: 574px;
 }
 
+.left #cameras {
+  display: flex;
+  justify-content: center;
+}
+
+.left .cam {
+  width: 75%;
+  border: 5px solid var(--spacer-color);
+}
+
 .left .run-details, .left .run-timing {
   display: flex;
   flex-direction: column;
@@ -17,7 +27,7 @@
 
   width: 95%;
   padding: 30px 0;
-  
+
   flex-grow: 0;
 }
 
