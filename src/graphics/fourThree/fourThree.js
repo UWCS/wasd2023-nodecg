@@ -11,7 +11,7 @@ import RunnersComponent from '../runners/runners.js';
 import CouchComponent from '../couch/couch.js';
 import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
-import { RunGameComponent, RunDetailsComponent, LogosRotate } from '../common/common.js';
+import { RunGameComponent, RunDetailsComponent, LogosComponent } from '../common/common.js';
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
@@ -42,7 +42,7 @@ class FourThreeComponent {
             customData: get(vnode, 'attrs.run.customData'),
           }),
           m(CouchComponent, { customData: get(vnode, 'attrs.run.customData') }),
-          m(LogosRotate, { hold: 22 }),
+          m(LogosComponent),
         ]),
       ]),
       m(BarComponent, { total: vnode.attrs.total }),

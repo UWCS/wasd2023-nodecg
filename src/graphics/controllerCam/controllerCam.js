@@ -2,13 +2,14 @@ import m from 'mithril';
 import { get } from 'lodash';
 
 import '../common.css'
-import './ControllerCam.css';
+import './controllerCam.css';
 
 import TimerComponent from '../timer/timer.js';
 import RunnersComponent from '../runners/runners.js';
 import CouchComponent from '../couch/couch.js';
 import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
+import { RunGameComponent, RunDetailsComponent, LogosComponent } from '../common/common.js';
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
@@ -33,27 +34,12 @@ class ControllerCamComponent {
             customData: get(vnode, 'attrs.run.customData'),
           }),
           m(CouchComponent, { customData: get(vnode, 'attrs.run.customData') }),
-          m('.logos', [
-            m('.logo-multi', [
-              m('.logo .wasd-light'),
-              m('.logo .wasd-dark'),
-            ]),
-            // m('.logo-multi', [
-            //   m('.logo .special-effect-white'),
-            //   m('.logo .special-effect-orange'),
-            // ]),
-          ]),
+          m(LogosComponent),
         ]),
         m('.bottom',[
           m('.run-details', [
-            m('.run-game', String(get(vnode, 'attrs.run.game'))),
-            m('.run-details-row', [
-              m('div', String(get(vnode, 'attrs.run.system'))),
-              m('div', sep),
-              m('div', String(get(vnode, 'attrs.run.release'))),
-              m('div', sep),
-              m('div', String(get(vnode, 'attrs.run.category'))),
-            ]),
+            m(RunGameComponent, { game: get(vnode, 'attrs.run.game') }),
+            m(RunDetailsComponent, { run: get(vnode, 'attrs.run') }),
           ]),
           m('.run-timing', [
             m(TimerComponent, { time: vnode.attrs.time }),
