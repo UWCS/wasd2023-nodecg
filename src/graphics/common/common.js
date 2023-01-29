@@ -23,7 +23,7 @@ export class RunDetailsComponent {
         const release = get(vnode, 'attrs.run.release');
         const category = get(vnode, 'attrs.run.category');
         const sep = '/';
-        
+
         const contents = [system, release, category].filter(i => i).join(`  ${sep}  `);
         return m('.run-details-row', contents);
     }
@@ -55,7 +55,7 @@ export class LogosComponent {
         if (this.anim) {
             this.anim.kill();
             const logos = Array.from(vnode.dom.children);
-            logos.forEach((logo) => logo.style="opacity: 1.0;");
+            logos.forEach((logo) => logo.style = "opacity: 1.0;");
             vnode.dom.classList.remove("stack");
             this.anim = undefined;
         }
@@ -93,5 +93,32 @@ export class LogosComponent {
 
     onremove(vnode) {
         this.end(vnode);
+    }
+}
+
+
+export class CamsComponent {
+    view(vnode) {
+        return m("#cameras", [
+            m(".cam.cam1"),
+            m(".cam.cam2"),
+            m(".cam.cam3"),
+            m(".cam.cam4"),
+        ])
+    }
+
+    update_cams(n) {
+        gsap.set('.cam.cam1', { hidden: n < 1});
+        gsap.set('.cam.cam2', { hidden: n < 2});
+        gsap.set('.cam.cam3', { hidden: n < 3});
+        gsap.set('.cam.cam4', { hidden: n < 4});
+    }
+
+    oncreate(vnode) {
+        const rep = vnode.attrs.camNumRep;
+
+        rep.on('change', (newMode, oldMode) => {
+            this.update_cams(newMode);
+        });
     }
 }

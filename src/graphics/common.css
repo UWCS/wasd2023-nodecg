@@ -82,9 +82,14 @@ body {
   justify-content: flex-start;
 }
 
+#cameras {
+  width: 100%;
+}
+
 .cam {
   width: 100%;
   min-height: 360px;
+  aspect-ratio: 16/9;
   border-bottom: 5px solid var(--spacer-color);
   background-color: var(--chroma-green);
 }

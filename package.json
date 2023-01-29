@@ -49,6 +49,12 @@
         "width": 2,
         "name": "backgroundMode",
         "title": "Background Mode"
+      },
+      {
+        "file": "cam2/index.html",
+        "width": 2,
+        "name": "cam2",
+        "title": "Cam Control"
       }
     ],
     "graphics": [
@@ -60,18 +66,6 @@
       },
       {
         "file": "fourThree/index.html",
-        "width": 1920,
-        "height": 1080,
-        "singleInstance": false
-      },
-      {
-        "file": "race/index.html",
-        "width": 1920,
-        "height": 1080,
-        "singleInstance": false
-      },
-      {
-        "file": "controllerCam/index.html",
         "width": 1920,
         "height": 1080,
         "singleInstance": false
