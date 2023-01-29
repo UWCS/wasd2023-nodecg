@@ -90,6 +90,7 @@ body {
   width: 100%;
   aspect-ratio: 16/9;
   border-bottom: 5px solid var(--spacer-color);
+  border-right: 5px solid var(--spacer-color);
   background-color: var(--chroma-green);
   box-sizing: content-box;
 }

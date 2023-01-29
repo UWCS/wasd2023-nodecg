@@ -16,7 +16,8 @@ const replicants = {
   timer: NodeCG.Replicant('timer', 'nodecg-speedcontrol'),
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
-  camNum: NodeCG.Replicant('camnum', 'wasd'),
+  camSizesRep: NodeCG.Replicant('camSizes', 'wasd'),
+  camNumRep: NodeCG.Replicant('camNum', 'wasd'),
 };
 
 class SixteenNineComponent {
@@ -26,7 +27,7 @@ class SixteenNineComponent {
       m('.graphic .overlay', [
         m('.game'),
         m('.left', [
-          m(CamsComponent, { camNumRep: vnode.attrs.camNumRep }),
+          m(CamsComponent, { camSizesRep: vnode.attrs.camSizesRep, camNumRep: vnode.attrs.camNumRep }),
           m(RunnersComponent, {
             players: get(vnode, 'attrs.run.teams[0].players'),
             customData: get(vnode, 'attrs.run.customData'),
@@ -59,7 +60,8 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         time: replicants.timer.value.time,
         total: Math.floor(replicants.total.value),
         backgroundModeRep: replicants.backgroundMode,
-        camNumRep: replicants.camNum,
+        camSizesRep: replicants.camSizesRep,
+        camNumRep: replicants.camNumRep,
       });
     }
   });

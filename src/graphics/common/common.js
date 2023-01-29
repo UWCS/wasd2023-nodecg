@@ -107,18 +107,37 @@ export class CamsComponent {
         ])
     }
 
-    update_cams(n) {
-        gsap.set('.cam.cam1', { hidden: n < 1});
-        gsap.set('.cam.cam2', { hidden: n < 2});
-        gsap.set('.cam.cam3', { hidden: n < 3});
-        gsap.set('.cam.cam4', { hidden: n < 4});
+    update_cams_vis(n) {
+        console.log(n);
+        if (n !== undefined) {
+            gsap.set('.cam.cam1', { hidden: n <= 0});
+            gsap.set('.cam.cam2', { hidden: n <= 1});
+            gsap.set('.cam.cam3', { hidden: n <= 2});
+            gsap.set('.cam.cam4', { hidden: n <= 3});
+        } else n = 1;
+    }
+
+    update_cams_asp(arr) {
+        console.log(arr);
+        if (arr !== undefined) {
+            gsap.set('.cam.cam1', { "aspect-ratio": arr[0]});
+            gsap.set('.cam.cam2', { "aspect-ratio": arr[1]});
+            gsap.set('.cam.cam3', { "aspect-ratio": arr[2]});
+            gsap.set('.cam.cam4', { "aspect-ratio": arr[3]});
+        } else arr = ["16/9", "16/9", "16/9", "16/9"];
     }
 
     oncreate(vnode) {
         const rep = vnode.attrs.camNumRep;
 
         rep.on('change', (newMode, oldMode) => {
-            this.update_cams(newMode);
+            this.update_cams_vis(newMode);
+        });
+
+        const rep2 = vnode.attrs.camSizesRep;
+
+        rep2.on('change', (newMode, oldMode) => {
+            this.update_cams_asp(newMode);
         });
     }
 }
