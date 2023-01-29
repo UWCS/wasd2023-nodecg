@@ -9,7 +9,7 @@ import RunnersComponent from '../runners/runners.js';
 import CouchComponent from '../couch/couch.js';
 import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
-import { RunGameComponent, RunDetailsComponent, LogosStack } from '../common/common.js';
+import { RunGameComponent, RunDetailsComponent, LogosComponent } from '../common/common.js';
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
@@ -33,7 +33,7 @@ class SixteenNineComponent {
             customData: get(vnode, 'attrs.run.customData'),
           }),
           m(CouchComponent, { customData: get(vnode, 'attrs.run.customData') }),
-          m(LogosStack),
+          m(LogosComponent),
         ]),
         m('.bottom',[
           m('.run-details', [
