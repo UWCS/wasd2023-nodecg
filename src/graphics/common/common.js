@@ -80,6 +80,9 @@ export class LogosComponent {
     onupdate(vnode) {
         const w = vnode.dom.offsetWidth;
         const h = vnode.dom.offsetHeight;
+
+        if (h < 100) gsap.set(".logos", { display: "none" });
+        
         if (h * 1.0 / w > 1.25) {
             this.end(vnode);
         } else {
