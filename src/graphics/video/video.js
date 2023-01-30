@@ -25,17 +25,19 @@ class UpNext {
       run = vnode.attrs.nextRuns[0];
     }
 
+    const details = [
+      get(run, 'category', ''),
+      get(run, 'teams[0].players', []).map(p => p.name).join(', '),
+      get(run, 'system', ''),
+      get(run, 'estimate'),
+    ].filter(e => e).join(' / ');
+
     return m('.video-up-next-container', [
       m('.video-up-next-label', 'Coming Up Next'),
       m('.video-v-space'),
       m('.video-up-next-game', run.game),
-      m('.video-up-next-details', [
-        get(run, 'category', ''),
-        get(run, 'system', ''),
-        get(run, 'teams[0].players', []).map(p => p.name).join(', '),
-        get(run, 'estimate'),
-      ].join('/')),
-    ]);
+      m('.video-up-next-details', details),
+    ])
   }
 }
 
@@ -47,10 +49,6 @@ class VideoScreenComponent {
       m(BeachBackground, { backgroundModeRep: vnode.attrs.backgroundModeRep }),
       m('.graphic .overlay', [
         m('.video-component-container', [
-          m('.video-special-effect-multi', [
-            m('.video-logo.special-effect-orange'),
-            m('.video-logo.special-effect-white'),
-          ]),
           m('.video-greenscreen'),
           m(UpNext, { nextRuns: vnode.attrs.nextRuns }),
         ]),
