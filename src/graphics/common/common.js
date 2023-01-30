@@ -68,7 +68,7 @@ export class LogosComponent {
 
             logos.forEach((logo) => {
                 tl.from(logo, { opacity: 0 });
-                tl.to({}, vnode.attrs.hold || 2, {});
+                tl.to({}, vnode.attrs.hold || 5, {});
                 tl.to(logo, { opacity: 0 });
             });
 
