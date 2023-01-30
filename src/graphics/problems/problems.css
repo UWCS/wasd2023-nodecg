@@ -7,36 +7,25 @@
   transform: translate(-50%, 0);
 }
 
-.problems-image {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: absolute;
-
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+.logos {
+  height: 100%;
 }
 
-.problems-image.notlikethis {
+.dvd {
+  position: absolute;
   width: 200px;
   height: 200px;
-
-  background-image: url('../assets/not_like_this.png');
+  background-image: url('../assets/wasd-avatar.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 200px;
+  animation: moveX 4s linear 0s infinite alternate, moveY 5.8734s linear 0s infinite alternate;
 }
 
-.problems-image.wasd-light {
-  width: 300px;
-  height: 200px;
-
-  background-image: url('../assets/wasd-keys-summer-light.svg');
-  opacity: var(--night-element-opacity);
+@keyframes moveX {
+  from { left: 0; } to { left: 1720px; }
 }
 
-.problems-image.wasd-dark {
-  width: 300px;
-  height: 200px;
-
-  background-image: url('../assets/wasd-keys-summer-dark.svg');
-  opacity: var(--day-element-opacity);
+@keyframes moveY {
+  from { top: 0; } to { top: 880px; }
 }

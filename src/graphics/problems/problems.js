@@ -10,45 +10,17 @@ const replicants = {
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
 };
 
-class ProblemsImages {
-  view() {
-    return m('div', [
-      m('div', [
-        m('.problems-image .wasd-light'),
-        m('.problems-image .wasd-dark'),
-      ]),
-      m('.problems-image .notlikethis'),
-    ]);
-  }
-
-  onremove(vnode) {
-    if (this.anim) {
-      this.anim.kill();
-    }
-  }
-
-  oncreate(vnode) {
-    if (this.anim) {
-      this.anim.kill();
-    }
-
-    const tl = gsap.timeline({ repeat: -1 });
-
-    Array.from(vnode.dom.children).forEach((child) => {
-      tl.from(child, { opacity: 0 });
-      tl.to({}, 20, {});
-      tl.to(child, { opacity: 0});
-    });
-
-    this.anim = tl;
-  }
-}
-
 class ProblemsComponent {
   view(vnode) {
     return m('.graphic .fullscreen', [
       m(BeachBackground, { backgroundModeRep: vnode.attrs.backgroundModeRep }),
-      m(ProblemsImages),
+      m('.logos', [
+        m('.logo-multi', [
+            m('.logo .wasd-light'),
+            m('.logo .wasd-dark'),
+        ]),
+      ]),
+      m(".dvd"),
       m('.problems-text', 'Technical Difficulties'),
     ]);
   }
