@@ -9,9 +9,17 @@
     "streamTitle": "🔴 WASD 2023 - Raising money for SpecialEffect: {{game}} - {{category}}",
     "streamDefaultGame": "Games + Demos"
   },
-  "schedule": {
-    "ignoreGamesWhileImporting": [ "Setup" ],
-    "customData": [
+  "oengus": {
+    "defaultMarathon": "wasd2023",
+    "useJapanese": false,
+    "ignoreGamesWhileImporting": [
+      "Setup"
+    ],
+    "disableSpeedrunComLookup": false,
+    "useSandbox": false
+  },
+  "customData": {
+    "run": [
       {
         "name": "Couch 1 Name (optional)",
         "key": "c1Name",
