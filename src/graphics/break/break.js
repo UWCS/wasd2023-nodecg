@@ -9,6 +9,8 @@ import BeachBackground from '../beach/beach.js';
 import CurrentSongComponent from '../currentSong/currentSong.js';
 import BarComponent from '../bar/bar.js';
 import { nextRuns } from '../nextRuns/nextRuns.js';
+import { LogosComponent } from '../common/common.js';
+
 
 const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
@@ -137,14 +139,7 @@ class BreakComponent {
       m('.graphic .overlay', [
         m('.break-container', [
           m('.break-left', [
-            m('.break-logo-multi .wasd', [
-              m('.break-logo .wasd-light'),
-              m('.break-logo .wasd-dark'),
-            ]),
-            m('.break-logo-multi .special-effect', [
-              m('.break-logo .special-effect-white'),
-              m('.break-logo .special-effect-orange'),
-            ]),
+            m(LogosComponent),
             m('.break-h-space'),
             m('.countdown-container', [
               m('.countdown-label', 'BACK SOON'),

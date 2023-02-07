@@ -45,8 +45,9 @@ class ScrollText {
 
 export default class CurrentSongComponent {
   view(vnode) {
-    const { name, artist, albumArt } = vnode.attrs;
-
+    const { name, artist, albumArt, playing } = vnode.attrs;
+    
+    if (!playing) return null;
     return m('.current-song-container', [
       m('.current-song-art-container',[
         (albumArt) ? m('img.current-song-art', { src: albumArt }) : null,
