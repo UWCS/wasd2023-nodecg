@@ -1,0 +1,24 @@
+.ann-container {
+  width: 100%;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.ann-status {
+  font-size: 22px;
+}
+
+.ann-controls {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.ann-button {
+  font-size: 24px;
+  border-radius: 4px;
+}
