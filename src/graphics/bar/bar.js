@@ -31,10 +31,10 @@ class Ticker extends EventTarget {
 
 class CTA {
   view(vnode) {
-    return m('.cta', vnode.attrs.ctas.map(c => m('.cta-text', c)));
+    return m('.cta', vnode.attrs.barAnnouncementsRep.value.map(c => m('.cta-text', c)));
   }
 
-  oncreate(vnode) {
+  create_anim(vnode) {
     const ctas = Array.from(vnode.dom.children);
 
     const tl = gsap.timeline({ repeat: -1 });
@@ -46,6 +46,16 @@ class CTA {
     });
 
     this.anim = tl;
+    console.log(tl);
+  }
+
+  oncreate(vnode) {
+    this.create_anim(vnode);
+  }
+  
+  onupdate(vnode) {
+    if (this.anim) this.anim.kill();
+    this.create_anim(vnode);
   }
 
   onremove(vnode) {
@@ -76,13 +86,8 @@ export default class BarComponent {
       ]),
       m('.bar-v-space'),
       m(CTA, {
-        hold: 30,
-        ctas: [
-        'Warwick\'s Awesome Speedruns & Demos 2023',
-        'See the full schedule at warwickspeed.run/schedule',
-        'WASD 2023 is raising money for SpecialEffect',
-        'Donate now at warwickspeed.run/donate',
-        ]
+        hold: 10,
+        barAnnouncementsRep: vnode.attrs.barAnnouncementsRep
       }),
       m('.bar-v-space'),
       m('span', moment().format('HH:mm')),

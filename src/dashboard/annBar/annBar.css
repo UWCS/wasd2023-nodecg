@@ -16,6 +16,12 @@
   flex-direction: row;
   align-items: center;
   gap: 30px;
+  width: 100%;
+}
+
+.ann-input {
+  font-size: 24px;
+  width: 100%;
 }
 
 .ann-button {
