@@ -12,6 +12,8 @@ class CamControl {
     const rep = vnode.attrs.camSizesRep;
 
     const row = (i) => {
+      if (numrep.value <= i) return null;
+      
       return m('.cam2-controls', [
         m('button.cam2-button', { disabled: numrep.value <= i || rep.value[i] == "16/9", onclick: () => { rep.value[i] = "16/9"; } }, '16:9'),
         m('button.cam2-button', { disabled: numrep.value <= i || rep.value[i] == "4/3",  onclick: () => { rep.value[i] = "4/3"; } }, '4:3'),
