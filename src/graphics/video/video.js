@@ -14,6 +14,7 @@ const replicants = {
   runArray: NodeCG.Replicant('runDataArray', 'nodecg-speedcontrol'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
+  barAnnouncementsRep: NodeCG.Replicant('barAnnouncementsRep', 'wasd'),
 };
 
 class UpNext {
@@ -53,7 +54,7 @@ class VideoScreenComponent {
           m(UpNext, { nextRuns: vnode.attrs.nextRuns }),
         ]),
       ]),
-      m(BarComponent, { total: vnode.attrs.total }),
+      m(BarComponent, { total: vnode.attrs.total, barAnnouncementsRep: vnode.attrs.barAnnouncementsRep }),
     ]);
   }
 }
@@ -65,6 +66,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         total: Math.floor(replicants.total.value),
         backgroundModeRep: replicants.backgroundMode,
         nextRuns: nextRuns(replicants.run.value, replicants.runArray.value),
+        barAnnouncementsRep: replicants.barAnnouncementsRep,
       });
     }
   });

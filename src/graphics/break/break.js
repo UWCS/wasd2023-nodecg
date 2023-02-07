@@ -21,6 +21,7 @@ const replicants = {
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
   challenges: NodeCG.Replicant('challenges', 'nodecg-tiltify'),
   polls: NodeCG.Replicant('donationpolls', 'nodecg-tiltify'),
+  barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
 };
 
 class Incentive {
@@ -164,7 +165,7 @@ class BreakComponent {
           ]),
         ]),
       ]),
-      m(BarComponent, { total: vnode.attrs.total }),
+      m(BarComponent, { total: vnode.attrs.total, barAnnouncementsRep: vnode.attrs.barAnnouncementsRep }),
     ]);
   }
 }
@@ -181,6 +182,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         incentives: replicants.challenges.value,
         dayAmount: Math.floor(get(replicants.polls,'value[1].options[0].totalAmountRaised', 0)),
         nightAmount: Math.floor(get(replicants.polls,'value[1].options[1].totalAmountRaised', 0)),
+        barAnnouncementsRep: replicants.barAnnouncementsRep,
       });
     }
   });

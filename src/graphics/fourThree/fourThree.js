@@ -18,6 +18,7 @@ const replicants = {
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
   camSizesRep: NodeCG.Replicant('camSizes', 'wasd'),
   camNumRep: NodeCG.Replicant('camNum', 'wasd'),
+  barAnnouncementsRep: NodeCG.Replicant('barAnnouncementsRep', 'wasd'),
 };
 
 class FourThreeComponent {
@@ -44,7 +45,7 @@ class FourThreeComponent {
           ]),
         ]),
       ]),
-      m(BarComponent, { total: vnode.attrs.total }),
+      m(BarComponent, { total: vnode.attrs.total, barAnnouncementsRep: vnode.attrs.barAnnouncementsRep }),
     ]);
   }
 }
@@ -59,6 +60,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         backgroundModeRep: replicants.backgroundMode,
         camSizesRep: replicants.camSizesRep,
         camNumRep: replicants.camNumRep,
+        barAnnouncementsRep: replicants.barAnnouncementsRep,
       });
     }
   });
