@@ -38,7 +38,7 @@ class Incentive {
   }
 
   onupdate(vnode) {
-    const bar = vnode.dom.children[2].children[0];
+    const bar = vnode.dom.children[1].children[0];
 
     const current = Number(vnode.attrs.incentive.totalAmountRaised);
     const max = Number(vnode.attrs.incentive.amount);
@@ -49,31 +49,46 @@ class Incentive {
   }
 }
 
+class PollOption {
+  view(vnode) {
+    let option = vnode.attrs.option;
+    return m('.break-option-container', [
+      m('.break-poll-option', option.name),
+      m('.break-poll-bar', [
+        m('.break-poll-progress'),
+        m('.break-poll-amount', `£${option.totalAmountRaised}`),
+      ]),
+    ])
+  }
+
+  onupdate(vnode) {
+    const bar = vnode.dom.children[1].children[1].children[0];
+
+    const current = Number(vnode.attrs.option.totalAmountRaised);
+    const max = Number(vnode.attrs.max);
+
+    const width = Math.min(((current / max) * 100), 100);
+
+    gsap.to(bar, { width: `${width}%`, ease: 'expo.out', duration: 3 });
+  }
+}
 
 class Poll {
   view(vnode) {
     console.log(vnode.attrs.poll);
     const poll = vnode.attrs.poll;
-    
-    const options = poll.options.sort((left, right) => left.totalAmountRaised > right.totalAmountRaised) // tmp
-      .map((p) => m(Poll, { poll: p, key: p.id }));
+
+    let max = 1;
+    for (let o in poll.options) {
+      max += o;
+    }
+    // .sort((left, right) => left.totalAmountRaised > right.totalAmountRaised)
+    const options = poll.options.map((o) => m(PollOption, { poll: poll, option: o, max: max }));
 
     return m('.break-poll-container', [
       m('.break-poll-name', poll.name),
-
-      
+      ...options
     ]);
-  }
-
-  onupdate(vnode) {
-    const bar = vnode.dom.children[2].children[0];
-
-    const current = Number(vnode.attrs.incentive.totalAmountRaised);
-    const max = Number(vnode.attrs.incentive.amount);
-
-    const width = Math.min(((current / max) * 100), 100);
-
-    gsap.to(bar, { width: `${width}%`, ease: 'expo.out', duration: 3 });
   }
 }
 
@@ -82,7 +97,7 @@ class Incentives {
     const incentives = vnode.attrs.incentives.filter(i => i.active)
       .sort((left, right) => left.endsAt < right.endsAt) // tmp
       .map((i) => m(Incentive, { incentive: i, key: i.id }));
-    
+
     const polls = vnode.attrs.polls.filter(i => i.active)
       .sort((left, right) => left.updatedAt < right.updatedAt) // tmp
       .map((p) => m(Poll, { poll: p, key: p.id }));
