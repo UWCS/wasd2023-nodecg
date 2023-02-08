@@ -68,21 +68,21 @@ class Incentives {
 class PollOption {
   view(vnode) {
     let option = vnode.attrs.option;
-    let percent = vnode.attrs.max == 0 ? 0 : Math.round(Number(option.totalAmountRaised) / Number(vnode.attrs.max));
+    let percent = vnode.attrs.max == 0 ? 0.0 : Math.round(100 * Number(option.totalAmountRaised) / vnode.attrs.max);
     return m('.break-option-container', [
       m('.break-poll-option', option.name),
       m('.break-poll-bar', [
         m('.break-poll-progress'),
-        m('.break-poll-amount', `${percent}% (£${option.totalAmountRaised})`),
+        m('.break-poll-amount', `${percent}% (£${Number(option.totalAmountRaised)})`),
       ]),
     ])
   }
-
+  
   onupdate(vnode) {
-    const bar = vnode.dom.children[1].children[1].children[0];
+    const bar = vnode.dom.getElementsByClassName("break-poll-progress")[0];
 
     const current = Number(vnode.attrs.option.totalAmountRaised);
-    const max = Number(vnode.attrs.max);
+    const max = vnode.attrs.max;
 
     const width = vnode.attrs.max == 0 ? 0 : Math.min(((current / max) * 100), 100);
 
@@ -95,10 +95,12 @@ class Poll {
     console.log(vnode.attrs.poll);
     const poll = vnode.attrs.poll;
 
-    let max = 0;
-    for (let o in poll.options) {
-      max += o;
+    let max = 0.0;
+    for (let o of poll.options) {
+      max += Number(o.totalAmountRaised);
+      console.log(o, o.totalAmountRaised, max);
     }
+    console.log(max);
     // .sort((left, right) => left.totalAmountRaised > right.totalAmountRaised)
     const options = poll.options.map((o) => m(PollOption, { poll: poll, option: o, max: max }));
 
@@ -128,7 +130,6 @@ class BreakMultiBox {
     return m('.break-multibox', [
       m('.break-multibox-item', [
         m('.break-later-on', [
-          m('.break-h-space'),
           m('.break-right-label', 'Later On'),
           m('.break-h-space'),
           (
