@@ -1,3 +1,7 @@
+.graphic {
+  background-image: url('../assets/wasd-bg-4-3.png');
+}
+
 .game {
   height: 100%;
   width: auto;

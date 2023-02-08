@@ -1,3 +1,7 @@
+.graphic {
+  background-image: url('../assets/wasd-bg-couch.png');
+}
+
 .couch-component-container {
   display: flex;
   flex-direction: row;
