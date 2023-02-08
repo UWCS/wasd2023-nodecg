@@ -187,6 +187,23 @@
   align-items: center;
 
   margin-bottom: 25px;
+  gap: 25px;
+
+  background-color: #22222280;
+  border-radius: 7px;
+  padding: 15px;
+}
+
+.break-incentive-container {
+  gap: 5px;
+}
+
+.break-option-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
 }
 
 .break-incentive-name, .break-poll-name {
@@ -219,7 +236,7 @@
   width: 0%;
 }
 
-.break-incentive-amount, .break-poll-amount {
+.break-incentive-amount, .break-poll-amount, .break-poll-option {
   position: relative;
   font-size: 26px;
 }
