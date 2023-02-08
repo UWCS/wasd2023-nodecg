@@ -1,9 +1,11 @@
 import m from 'mithril';
 import gsap from 'gsap';
 import moment from 'moment';
+import fitty from 'fitty';
 
 import '../common.css';
 import './bar.css';
+import { ScrollText } from '../common/common.js';
 
 class Ticker extends EventTarget {
   constructor(intervalMs) {
@@ -31,7 +33,7 @@ class Ticker extends EventTarget {
 
 class CTA {
   view(vnode) {
-    return m('.cta', vnode.attrs.barAnnouncementsRep.value.map(c => m('.cta-text', c)));
+    return m('.cta', vnode.attrs.barAnnouncementsRep.value.map(c => m(".cta-text", c)));
   }
 
   create_anim(vnode) {
@@ -39,23 +41,29 @@ class CTA {
 
     const tl = gsap.timeline({ repeat: -1 });
 
-    ctas.forEach((cta) => {
-      tl.from(cta, { opacity: 0 });
-      tl.to({}, vnode.attrs.hold || 2, {});
-      tl.to(cta, { opacity: 0 });
-    });
+    ctas.forEach((c) => {
+      tl.fromTo(c, { opacity: 0 }, { opacity: 1 });
+      tl.to(c, { opacity: 0 }, "+=2");
+  });
 
     this.anim = tl;
-    console.log(tl);
   }
 
   oncreate(vnode) {
     this.create_anim(vnode);
-  }
-  
+    console.log(vnode);
+
+    for (let child of vnode.dom.children) {
+      fitty(child, { maxSize: 36 });
+    }
+
+    vnode.attrs.barAnnouncementsRep.on("change", () => { console.log("change"); this.anim.kill(); this.create_anim(vnode) });
+  } 
+
   onupdate(vnode) {
-    if (this.anim) this.anim.kill();
-    this.create_anim(vnode);
+    for (let child of vnode.dom.children) {
+      fitty(child, { maxSize: 36 });
+    }
   }
 
   onremove(vnode) {
