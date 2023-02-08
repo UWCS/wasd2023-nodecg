@@ -6,7 +6,7 @@ import './sixteenNine.css';
 
 import TimerComponent from '../timer/timer.js';
 import RunnersComponent from '../runners/runners.js';
-import CouchComponent from '../couch/couch.js';
+import CommsComponent from '../comms/comms.js';
 import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
 import { RunGameComponent, RunDetailsComponent, LogosComponent, CamsComponent } from '../common/common.js';
@@ -33,7 +33,7 @@ class SixteenNineComponent {
             players: get(vnode, 'attrs.run.teams[0].players'),
             customData: get(vnode, 'attrs.run.customData'),
           }),
-          m(CouchComponent, { customData: get(vnode, 'attrs.run.customData') }),
+          m(CommsComponent, { customData: get(vnode, 'attrs.run.customData') }),
           m(LogosComponent),
         ]),
         m('.bottom',[

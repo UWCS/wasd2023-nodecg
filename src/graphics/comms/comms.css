@@ -1,0 +1,61 @@
+.comms-container {
+  width: 95%;
+  letter-spacing: 2px;
+  padding: 12px 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  border-bottom: 2px solid var(--spacer-color);
+}
+
+.comms-label {
+  font-size: 20px;
+  margin-bottom: 5px;
+}
+
+.comms-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+
+  width: 100%;
+}
+
+.comms-mic-icon-multi {
+  height: 28px; width: 28px;
+  position: relative;
+}
+
+.comms-mic-icon {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.comms-mic-icon.light {
+  background-image: url('../assets/microphone-alt-solid-light.svg');
+  opacity: var(--night-element-opacity);
+}
+
+.comms-mic-icon.dark {
+  background-image: url('../assets/microphone-alt-solid-dark.svg');
+  opacity: var(--day-element-opacity);
+}
+
+.comms-person {
+  font-size: 28px;
+}
+
+.comms-pronouns {
+  letter-spacing: 0px;
+  font-size: 14px;
+  min-width: 30px;
+}

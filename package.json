@@ -77,7 +77,7 @@
         "singleInstance": false
       },
       {
-        "file": "video/index.html",
+        "file": "couch/index.html",
         "width": 1920,
         "height": 1080,
         "singleInstance": false
