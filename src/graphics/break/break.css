@@ -149,7 +149,7 @@
   */
 }
 
-.break-incentives-container {
+.break-incentives-container, .break-poll-container {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -160,7 +160,7 @@
   overflow: hidden;
 }
 
-.break-incentives-list {
+.break-incentives-list, .break-poll-list {
   padding-top: 15px;
   overflow: hidden;
 
@@ -179,7 +179,7 @@
   */
 }
 
-.break-incentive-container {
+.break-incentive-container, .break-poll-container {
   width: 90%;
 
   display: flex;
@@ -189,16 +189,12 @@
   margin-bottom: 25px;
 }
 
-.break-incentive-game {
-  font-size: 26px;
-}
-
-.break-incentive-name {
+.break-incentive-name, .break-poll-name {
   font-size: 30px;
   margin-bottom: 3px;
 }
 
-.break-incentive-bar {
+.break-incentive-bar, .break-poll-bar {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -213,7 +209,7 @@
   padding: 5px 0;
 }
 
-.break-incentive-progress {
+.break-incentive-progress, .break-poll-progress {
   position: absolute;
   opacity: 0.8;
   top: 0;
@@ -223,76 +219,7 @@
   width: 0%;
 }
 
-.break-incentive-amount {
+.break-incentive-amount, .break-poll-amount {
   position: relative;
   font-size: 26px;
 }
-
-.break-day-night-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  width: 100%;
-  height: 100%;
-
-  overflow: hidden;
-}
-
-.break-day-night-row {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  width: 90%;
-  font-size: 42px;
-  flex-grow: 1;
-}
-
-.break-day-night-label {
-  margin: 0 150px;
-}
-
-.break-day-night-amount {
-  margin: 0 240px;
-}
-
-.break-day-night-multi-image {
-  position: relative;
-  width: 300px;
-  height: 300px;
-  margin: 0 75px;
-}
-
-.break-day-night-image {
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-}
-
-.break-day-night-image.wasd-day-lightmode {
-  background-image: url('../assets/wasd-w-day-lightmode.png');
-  opacity: var(--night-element-opacity);
-}
-
-.break-day-night-image.wasd-day-darkmode {
-  background-image: url('../assets/wasd-w-day-darkmode.png');
-  opacity: var(--day-element-opacity);
-}
-
-.break-day-night-image.wasd-night-lightmode {
-  background-image: url('../assets/wasd-w-night-lightmode.png');
-  opacity: var(--night-element-opacity);
-}
-
-.break-day-night-image.wasd-night-darkmode {
-  background-image: url('../assets/wasd-w-night-darkmode.png');
-  opacity: var(--day-element-opacity);
-}
-
