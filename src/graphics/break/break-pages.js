@@ -1,5 +1,8 @@
 import m from 'mithril';
 import gsap from 'gsap';
+import fitty from 'fitty';
+
+import { RunGameComponent, RunDetailsComponent } from '../common/common.js';
 
 class Incentive {
   view(vnode) {
@@ -23,6 +26,12 @@ class Incentive {
     const width = Math.min(((current / max) * 100), 100);
 
     gsap.to(bar, { width: `${width}%`, ease: 'expo.out', duration: 3 });
+
+    fitty(vnode.dom.children[0], { maxSize: vnode.attrs.size || 30, multiline: false });
+  }
+
+  oncreate(vnode) {
+      fitty(vnode.dom.children[0], { maxSize: vnode.attrs.size || 30, multiline: false });
   }
 }
 
@@ -86,6 +95,14 @@ class Poll {
       ...options
     ]);
   }
+
+  onupdate(vnode) {
+      fitty(vnode.dom.children[0], { maxSize: vnode.attrs.size || 30, multiline: false });
+  }
+
+  oncreate(vnode) {
+      fitty(vnode.dom.children[0], { maxSize: vnode.attrs.size || 30, multiline: false });
+  }
 }
 
 export class Polls {
@@ -106,7 +123,7 @@ export class Run {
   view(vnode) {
     return m('.break-next-run-container', [
       m(RunGameComponent, { game: vnode.attrs.run.game, size: 40 }),
-      m(RunDetailsComponent, { run: vnode.attrs.run, size: 24 }),
+      m(RunDetailsComponent, { run: vnode.attrs.run, size: 24, multiline: vnode.attrs.multiline || false }),
     ]);
   }
 }
@@ -121,7 +138,7 @@ export class BreakMultiBox {
           (
             (vnode.attrs.nextRuns.length < 2)
               ? m('.break-next-run-game', 'That\'s All!')
-              : vnode.attrs.nextRuns.slice(1).map(run => m(Run, { run: run }))
+              : vnode.attrs.nextRuns.slice(1).map(run => m(Run, { run: run, multiline: vnode.attrs.multiline_games || false }))
           ),
         ]),
       ]),

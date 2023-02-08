@@ -29,11 +29,11 @@ export class RunDetailsComponent {
     }
 
     onupdate(vnode) {
-        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: false });
+        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: vnode.attrs.multiline || false });
     }
 
     oncreate(vnode) {
-        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: false });
+        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: vnode.attrs.multiline || false });
     }
 }
 
