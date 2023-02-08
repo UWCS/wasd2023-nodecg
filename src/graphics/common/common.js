@@ -19,22 +19,27 @@ export class RunGameComponent {
 
 export class RunDetailsComponent {
     view(vnode) {
-        const system = get(vnode, 'attrs.run.system');
-        const release = get(vnode, 'attrs.run.release');
-        const category = get(vnode, 'attrs.run.category');
-        const sep = '/';
-
-        const contents = [system, release, category].filter(i => i).join(`  ${sep}  `);
+        const run = vnode.attrs.run;
+        const full = vnode.attrs.full;
+        const user = full ? get(run, 'teams[0].players', []).map(p => p.name).join(', ') : "";
+        const category = get(run, 'category', '');
+        const estimate = full ? get(run, 'estimate') : "";
+        const system = get(run, 'system', '');
+        const release = get(run, 'release', '');
+        
+        let contents =  [user, category, estimate, system, release]
+        console.log(contents)
+        contents = contents.filter(i => i).join(`  /  `);
         return m('.run-details-row', contents);
     }
 
-    onupdate(vnode) {
-        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: vnode.attrs.multiline || false });
-    }
+    // onupdate(vnode) {
+    //     fitty(vnode.dom, { maxSize: vnode.attrs.size || 23 });
+    // }
 
-    oncreate(vnode) {
-        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: vnode.attrs.multiline || false });
-    }
+    // oncreate(vnode) {
+    //     fitty(vnode.dom, { maxSize: vnode.attrs.size || 23 });
+    // }
 }
 
 export class LogosComponent {

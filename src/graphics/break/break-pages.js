@@ -123,7 +123,7 @@ export class Run {
   view(vnode) {
     return m('.break-next-run-container', [
       m(RunGameComponent, { game: vnode.attrs.run.game, size: 40 }),
-      m(RunDetailsComponent, { run: vnode.attrs.run, size: 24, multiline: vnode.attrs.multiline || false }),
+      m(RunDetailsComponent, { run: vnode.attrs.run, size: 24, multiline: vnode.attrs.multiline, full: true }),
     ]);
   }
 }
@@ -138,7 +138,7 @@ export class BreakMultiBox {
           (
             (vnode.attrs.nextRuns.length < 2)
               ? m('.break-next-run-game', 'That\'s All!')
-              : vnode.attrs.nextRuns.slice(1).map(run => m(Run, { run: run, multiline: vnode.attrs.multiline_games || false }))
+              : vnode.attrs.nextRuns.slice(1).map(run => m(Run, { run: run, multiline: vnode.attrs.multiline_games }))
           ),
         ]),
       ]),

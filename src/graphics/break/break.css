@@ -87,6 +87,7 @@
   position: relative;
   overflow: hidden;
   background-color: #22222280;
+  padding: 0px 25px;
 }
 
 .break-next-run-container > * {
@@ -95,17 +96,6 @@
 
 .break-next-run-container .run-game {
   font-size: 40px;
-}
-
-.break-next-run-container .run-details-row {
-  width: 100%;
-
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-
-  font-size: 24px;
 }
 
 .break-multibox {

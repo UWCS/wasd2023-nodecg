@@ -50,8 +50,6 @@ class BreakComponent {
               nextRuns: vnode.attrs.nextRuns,
               incentives: vnode.attrs.incentives,
               polls: vnode.attrs.polls,
-              dayAmount: vnode.attrs.dayAmount,
-              nightAmount: vnode.attrs.nightAmount,
             }),
           ]),
         ]),
