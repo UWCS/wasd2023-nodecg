@@ -211,3 +211,7 @@ body {
   opacity: var(--day-element-opacity);
   width: 350px;
 }
+
+.graphic {
+  background-image: url('assets/wasd-bg-std.png');
+}

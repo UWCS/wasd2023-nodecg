@@ -14,6 +14,7 @@ It also uses [nodecg-cli](https://www.npmjs.com/package/nodecg-cli) to setup the
   for run detail management, run timing and Twitch detail integration
 * [`nodecg-tiltify`](https://github.com/daniellockard/nodecg-tiltify) for
   pulling donation and reward information for a campaign from Tiltify.com
+* [`nodecg-tiltify-donation-history`](https://github.com/daniellockard/nodecg-tiltify-donation-history) for displaying a reader in the NodeCG interface
 * [`ncg-spotify`](https://github.com/EwanLyon/ncg-spotify) for displaying the
   currently playing song used as background music being played via Spotify
 

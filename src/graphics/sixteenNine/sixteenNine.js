@@ -7,7 +7,7 @@ import './sixteenNine.css';
 import TimerComponent from '../timer/timer.js';
 import RunnersComponent from '../runners/runners.js';
 import CommsComponent from '../comms/comms.js';
-import BeachBackground from '../beach/beach.js';
+// import BeachBackground from '../beach/beach.js';
 import BarComponent from '../bar/bar.js';
 import { RunGameComponent, RunDetailsComponent, LogosComponent, CamsComponent } from '../common/common.js';
 
@@ -15,7 +15,7 @@ const replicants = {
   run: NodeCG.Replicant('runDataActiveRun', 'nodecg-speedcontrol'),
   timer: NodeCG.Replicant('timer', 'nodecg-speedcontrol'),
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
-  backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
+  // backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
   camSizesRep: NodeCG.Replicant('camSizes', 'wasd'),
   camNumRep: NodeCG.Replicant('camNum', 'wasd'),
   barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
@@ -24,7 +24,7 @@ const replicants = {
 class SixteenNineComponent {
   view(vnode) {
     return m('.graphic .fullscreen', [
-      m(BeachBackground, { backgroundModeRep: vnode.attrs.backgroundModeRep }),
+      // m(BeachBackground, { backgroundModeRep: vnode.attrs.backgroundModeRep }),
       m('.graphic .overlay', [
         m('.game'),
         m('.left', [
@@ -60,7 +60,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         run: replicants.run.value,
         time: replicants.timer.value.time,
         total: Math.floor(replicants.total.value),
-        backgroundModeRep: replicants.backgroundMode,
+        // backgroundModeRep: replicants.backgroundMode,
         camSizesRep: replicants.camSizesRep,
         camNumRep: replicants.camNumRep,
         barAnnouncementsRep: replicants.barAnnouncementsRep,
