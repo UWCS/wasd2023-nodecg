@@ -9,11 +9,11 @@ export class RunGameComponent {
     }
 
     onupdate(vnode) {
-        fitty(vnode.dom, { maxSize: 58, multiline: false });
+        fitty(vnode.dom, { maxSize: vnode.attrs.size || 58, multiline: false });
     }
 
     oncreate(vnode) {
-        fitty(vnode.dom, { maxSize: 58, multiline: false });
+        fitty(vnode.dom, { maxSize: vnode.attrs.size || 58, multiline: false });
     }
 }
 
@@ -29,11 +29,11 @@ export class RunDetailsComponent {
     }
 
     onupdate(vnode) {
-        fitty(vnode.dom, { maxSize: 23, multiline: false });
+        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: false });
     }
 
     oncreate(vnode) {
-        fitty(vnode.dom, { maxSize: 23, multiline: false });
+        fitty(vnode.dom, { maxSize: vnode.attrs.size || 23, multiline: false });
     }
 }
 
