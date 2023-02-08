@@ -145,7 +145,7 @@ export class CamsComponent {
 }
 
 
-class ScrollText {
+export class ScrollText {
     view(vnode) {
       return m(vnode.attrs.cls, vnode.attrs.txt);
     }

@@ -18,7 +18,7 @@ const replicants = {
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
   camSizesRep: NodeCG.Replicant('camSizes', 'wasd'),
   camNumRep: NodeCG.Replicant('camNum', 'wasd'),
-  barAnnouncementsRep: NodeCG.Replicant('barAnnouncementsRep', 'wasd'),
+  barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
 };
 
 class FourThreeComponent {

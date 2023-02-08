@@ -43,7 +43,7 @@ class CTA {
 
     ctas.forEach((c) => {
       tl.fromTo(c, { opacity: 0 }, { opacity: 1 });
-      tl.to(c, { opacity: 0 }, "+=2");
+      tl.to(c, { opacity: 0 }, "+="+vnode.attrs.hold);
   });
 
     this.anim = tl;
@@ -51,7 +51,6 @@ class CTA {
 
   oncreate(vnode) {
     this.create_anim(vnode);
-    console.log(vnode);
 
     for (let child of vnode.dom.children) {
       fitty(child, { maxSize: 36 });
@@ -94,7 +93,7 @@ export default class BarComponent {
       ]),
       m('.bar-v-space'),
       m(CTA, {
-        hold: 10,
+        hold: 5,
         barAnnouncementsRep: vnode.attrs.barAnnouncementsRep
       }),
       m('.bar-v-space'),

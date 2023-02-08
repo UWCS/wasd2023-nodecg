@@ -93,7 +93,7 @@ class BreakMultiBox {
 
     const tl = gsap.timeline({ repeat: -1, paused: true });
 
-    const hold = 20;
+    const hold = 2;
 
     boxes.forEach((box) => {
       gsap.set(box, { opacity: 0 });

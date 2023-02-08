@@ -14,7 +14,7 @@ const replicants = {
   runArray: NodeCG.Replicant('runDataArray', 'nodecg-speedcontrol'),
   backgroundMode: NodeCG.Replicant('backgroundMode', 'wasd'),
   total: NodeCG.Replicant('total', 'nodecg-tiltify'),
-  barAnnouncementsRep: NodeCG.Replicant('barAnnouncementsRep', 'wasd'),
+  barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
 };
 
 class UpNext {
