@@ -21,14 +21,14 @@ export class RunDetailsComponent {
     view(vnode) {
         const run = vnode.attrs.run;
         const full = vnode.attrs.full;
+        const stamp = new Date(get(run, 'scheduled', ''))
+        const when = full ? `${stamp.getHours()}:${stamp.getMinutes()}` : "";
         const user = full ? get(run, 'teams[0].players', []).map(p => p.name).join(', ') : "";
         const category = get(run, 'category', '');
-        const estimate = full ? get(run, 'estimate') : "";
         const system = get(run, 'system', '');
         const release = get(run, 'release', '');
         
-        let contents =  [user, category, estimate, system, release]
-        console.log(contents)
+        let contents =  [user, when, category, system, release]
         contents = contents.filter(i => i).join(`  /  `);
         return m('.run-details-row', contents);
     }
