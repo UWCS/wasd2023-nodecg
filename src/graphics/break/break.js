@@ -27,11 +27,9 @@ const replicants = {
 class Incentive {
   view(vnode) {
     const { name, amount, totalAmountRaised } = vnode.attrs.incentive;
-    const [ gameName, incentiveName ] = name.split('-').map(s => s.trim());
 
     return m('.break-incentive-container', [
-      m('.break-incentive-game', gameName),
-      m('.break-incentive-name', incentiveName),
+      m('.break-incentive-name', name),
       m('.break-incentive-bar', [
         m('.break-incentive-progress'),
         m('.break-incentive-amount', `£${totalAmountRaised} / £${amount}`),
@@ -51,17 +49,49 @@ class Incentive {
   }
 }
 
+
+class Poll {
+  view(vnode) {
+    console.log(vnode.attrs.poll);
+    const poll = vnode.attrs.poll;
+    
+    const options = poll.options.sort((left, right) => left.totalAmountRaised > right.totalAmountRaised) // tmp
+      .map((p) => m(Poll, { poll: p, key: p.id }));
+
+    return m('.break-poll-container', [
+      m('.break-poll-name', poll.name),
+
+      
+    ]);
+  }
+
+  onupdate(vnode) {
+    const bar = vnode.dom.children[2].children[0];
+
+    const current = Number(vnode.attrs.incentive.totalAmountRaised);
+    const max = Number(vnode.attrs.incentive.amount);
+
+    const width = Math.min(((current / max) * 100), 100);
+
+    gsap.to(bar, { width: `${width}%`, ease: 'expo.out', duration: 3 });
+  }
+}
+
 class Incentives {
   view(vnode) {
+    const incentives = vnode.attrs.incentives.filter(i => i.active)
+      .sort((left, right) => left.endsAt < right.endsAt) // tmp
+      .map((i) => m(Incentive, { incentive: i, key: i.id }));
+    
+    const polls = vnode.attrs.polls.filter(i => i.active)
+      .sort((left, right) => left.updatedAt < right.updatedAt) // tmp
+      .map((p) => m(Poll, { poll: p, key: p.id }));
+
     return m('.break-incentives-container', [
       m('.break-h-space'),
       m('.break-right-label', 'Donation Incentives'),
       m('.break-h-space'),
-      m('.break-incentives-list', ...vnode.attrs.incentives.filter(i => i.active)
-                                                           .sort((left, right) => left.endsAt < right.endsAt) // tmp
-                                                           .map((i) => {
-        return m(Incentive, { incentive: i, key: i.id });
-      })),
+      m('.break-incentives-list', ...incentives, ...polls),
     ]);
   }
 }
@@ -76,13 +106,13 @@ class BreakMultiBox {
           m('.break-h-space'),
           (
             (vnode.attrs.nextRuns.length < 2)
-            ? m('.break-next-run-game', 'NO RUNS!')
-            : vnode.attrs.nextRuns.slice(1).map(run => m(Run, { run: run }))
+              ? m('.break-next-run-game', 'NO RUNS!')
+              : vnode.attrs.nextRuns.slice(1).map(run => m(Run, { run: run }))
           ),
         ]),
       ]),
       m('.break-multibox-item', [
-        m(Incentives, { incentives: vnode.attrs.incentives }),
+        m(Incentives, { incentives: vnode.attrs.incentives, polls: vnode.attrs.polls }),
       ]),
     ]);
   }
@@ -117,18 +147,18 @@ class BreakMultiBox {
 
 class Run {
   view(vnode) {
+    const run = vnode.attrs.run;
+    const details = [
+      get(run, 'category', ''),
+      get(run, 'teams[0].players', []).map(p => p.name).join(', '),
+      get(run, 'system', ''),
+      get(run, 'estimate'),
+    ].filter(e => e).join(' / ');
+
     return m('.break-next-run-container', [
       m('.break-next-run-bg'),
       m('.break-next-run-game', vnode.attrs.run.game),
-      m('.break-next-run-details', [
-        m('span', vnode.attrs.run.category),
-        m('span', '·'),
-        m('span', vnode.attrs.run.system),
-        m('span', '·'),
-        m('span', get(vnode, 'attrs.run.teams[0].players', []).map(p => p.name).join(', ')),
-        m('span', '·'),
-        m('span', vnode.attrs.run.estimate),
-      ])
+      m('.break-next-run-details', details)
     ]);
   }
 }
@@ -159,6 +189,7 @@ class BreakComponent {
             m(BreakMultiBox, {
               nextRuns: vnode.attrs.nextRuns,
               incentives: vnode.attrs.incentives,
+              polls: vnode.attrs.polls,
               dayAmount: vnode.attrs.dayAmount,
               nightAmount: vnode.attrs.nightAmount,
             }),
@@ -180,8 +211,9 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         backgroundModeRep: replicants.backgroundMode,
         nextRuns: nextRuns(replicants.run.value, replicants.runArray.value),
         incentives: replicants.challenges.value,
-        dayAmount: Math.floor(get(replicants.polls,'value[1].options[0].totalAmountRaised', 0)),
-        nightAmount: Math.floor(get(replicants.polls,'value[1].options[1].totalAmountRaised', 0)),
+        polls: replicants.polls.value,
+        dayAmount: Math.floor(get(replicants.polls, 'value[1].options[0].totalAmountRaised', 0)),
+        nightAmount: Math.floor(get(replicants.polls, 'value[1].options[1].totalAmountRaised', 0)),
         barAnnouncementsRep: replicants.barAnnouncementsRep,
       });
     }
