@@ -68,11 +68,12 @@ class Incentives {
 class PollOption {
   view(vnode) {
     let option = vnode.attrs.option;
+    let percent = vnode.attrs.max == 0 ? 0 : Math.round(Number(option.totalAmountRaised) / Number(vnode.attrs.max));
     return m('.break-option-container', [
       m('.break-poll-option', option.name),
       m('.break-poll-bar', [
         m('.break-poll-progress'),
-        m('.break-poll-amount', `£${option.totalAmountRaised}`),
+        m('.break-poll-amount', `${percent}% (£${option.totalAmountRaised})`),
       ]),
     ])
   }
@@ -83,7 +84,7 @@ class PollOption {
     const current = Number(vnode.attrs.option.totalAmountRaised);
     const max = Number(vnode.attrs.max);
 
-    const width = Math.min(((current / max) * 100), 100);
+    const width = vnode.attrs.max == 0 ? 0 : Math.min(((current / max) * 100), 100);
 
     gsap.to(bar, { width: `${width}%`, ease: 'expo.out', duration: 3 });
   }
@@ -94,7 +95,7 @@ class Poll {
     console.log(vnode.attrs.poll);
     const poll = vnode.attrs.poll;
 
-    let max = 1;
+    let max = 0;
     for (let o in poll.options) {
       max += o;
     }

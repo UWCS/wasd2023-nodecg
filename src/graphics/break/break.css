@@ -4,7 +4,7 @@
 
   position: relative;
 
-  padding: 50px 25px;
+  padding: 25px 15px 15px 15px;
 
   display: flex;
   flex-direction: row;
@@ -33,6 +33,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+  border-bottom: 25px;
 }
 
 .countdown-container {
@@ -74,14 +75,14 @@
 }
 
 .break-next-run-container {
-  width: 90%;
+  width: 95%;
   min-height: 130px;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: space-evenly;
-  margin: 10px 0;
+  margin: 10px 0 25px 0;
   border-radius: 10px;
   position: relative;
   overflow: hidden;
@@ -125,6 +126,7 @@
   width: 100%;
   flex: 1;
   position: relative;
+  overflow: hidden;
 }
 
 .break-multibox-item {
@@ -155,7 +157,8 @@
   align-items: center;
 
   width: 100%;
-  height: 100%;
+  height: fit-content;
+  max-height: 100%;
 
   overflow: hidden;
 }
@@ -180,22 +183,18 @@
 }
 
 .break-incentive-container, .break-poll-container {
-  width: 90%;
+  width: 95%;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 
   margin-bottom: 25px;
-  gap: 25px;
+  gap: 5px;
 
   background-color: #22222280;
   border-radius: 7px;
   padding: 15px;
-}
-
-.break-incentive-container {
-  gap: 5px;
 }
 
 .break-option-container {
