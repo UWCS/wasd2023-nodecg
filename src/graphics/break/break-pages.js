@@ -78,15 +78,12 @@ class PollOption {
 
 class Poll {
   view(vnode) {
-    console.log(vnode.attrs.poll);
     const poll = vnode.attrs.poll;
 
     let max = 0.0;
     for (let o of poll.options) {
       max += Number(o.totalAmountRaised);
-      console.log(o, o.totalAmountRaised, max);
     }
-    console.log(max);
     // .sort((left, right) => left.totalAmountRaised > right.totalAmountRaised)
     const options = poll.options.map((o) => m(PollOption, { poll: poll, option: o, max: max }));
 

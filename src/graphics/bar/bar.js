@@ -8,7 +8,7 @@ import './bar.css';
 import { ScrollText } from '../common/common.js';
 
 class Ticker extends EventTarget {
-  constructor(intervalMs) {
+  constructor(intervalMs, event) {
     super();
 
     if (typeof intervalMs !== 'number') {
@@ -16,6 +16,7 @@ class Ticker extends EventTarget {
     }
 
     this.intervalMs = intervalMs;
+    this.event = event || "tick";
   }
 
   start() {
@@ -27,26 +28,26 @@ class Ticker extends EventTarget {
   }
 
   tick() {
-    this.dispatchEvent(new Event('tick'));
+    this.dispatchEvent(new Event(this.event));
   }
 }
 
 class CTA {
   view(vnode) {
-    return m('.cta', vnode.attrs.barAnnouncementsRep.value.map(c => m(".cta-text", c)));
+    return m(".cta", m(".cta-text", vnode.attrs.barAnnouncementsRep.value[0]));
   }
 
   create_anim(vnode) {
-    const ctas = Array.from(vnode.dom.children);
-
-    const tl = gsap.timeline({ repeat: -1 });
-
-    ctas.forEach((c) => {
-      tl.fromTo(c, { opacity: 0 }, { opacity: 1 });
-      tl.to(c, { opacity: 0 }, "+="+vnode.attrs.hold);
-  });
-
-    this.anim = tl;
+    this.bar_ticker = new Ticker(2000);
+    this.bar_ticker.addEventListener("tick", () => {
+      if (this.anim) this.anim.kill();
+      gsap.to('.cta-text', { opacity: 0.0, duration: 0.25});
+      setTimeout(() => {
+        vnode.dom.children[0].innerHTML = this.choose_next(vnode);
+        gsap.to('.cta-text', { opacity: 1.0, duration: 0.25});
+      }, 250);
+    })
+    this.bar_ticker.start()
   }
 
   oncreate(vnode) {
@@ -56,7 +57,7 @@ class CTA {
       fitty(child, { maxSize: 36 });
     }
 
-    vnode.attrs.barAnnouncementsRep.on("change", () => { console.log("change"); this.anim.kill(); this.create_anim(vnode) });
+    // vnode.attrs.barAnnouncementsRep.on("change", () => { console.log("change"); this.create_anim(vnode) });
   } 
 
   onupdate(vnode) {
@@ -94,7 +95,8 @@ export default class BarComponent {
       m('.bar-v-space'),
       m(CTA, {
         hold: 5,
-        barAnnouncementsRep: vnode.attrs.barAnnouncementsRep
+        barAnnouncementsRep: vnode.attrs.barAnnouncementsRep,
+        barAnnouncementsIndexRep: vnode.attrs.barAnnouncementsIndexRep,
       }),
       m('.bar-v-space'),
       m('span', moment().format('HH:mm')),

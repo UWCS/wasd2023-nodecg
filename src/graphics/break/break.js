@@ -22,6 +22,7 @@ const replicants = {
   challenges: NodeCG.Replicant('challenges', 'nodecg-tiltify'),
   polls: NodeCG.Replicant('donationpolls', 'nodecg-tiltify'),
   barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
+  barAnnouncementsIndexRep: NodeCG.Replicant('barAnnouncementsIndex', 'wasd'),
 };
 
 class BreakComponent {
@@ -54,7 +55,8 @@ class BreakComponent {
           ]),
         ]),
       ]),
-      m(BarComponent, { total: vnode.attrs.total, barAnnouncementsRep: vnode.attrs.barAnnouncementsRep }),
+      m(BarComponent, { total: vnode.attrs.total, barAnnouncementsRep: vnode.attrs.barAnnouncementsRep, 
+        barAnnouncementsIndexRep: vnode.attrs.barAnnouncementsIndexRep }),
     ]);
   }
 }
@@ -62,6 +64,7 @@ class BreakComponent {
 NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
   m.mount(document.body, {
     view: () => {
+      console.log(replicants.barAnnouncementsIndexRep);
       return m(BreakComponent, {
         currentSong: replicants.currentSong.value,
         total: Math.floor(replicants.total.value),
@@ -71,6 +74,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         incentives: replicants.challenges.value,
         polls: replicants.polls.value,
         barAnnouncementsRep: replicants.barAnnouncementsRep,
+        barAnnouncementsIndexRep: replicants.barAnnouncementsIndexRep,
       });
     }
   });

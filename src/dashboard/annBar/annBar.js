@@ -15,10 +15,13 @@ const barAnnouncementsRep = NodeCG.Replicant('barAnnouncements', 'wasd', {
   defaultValue: [...defaultCTAs], persistent: true
 });
 
+const barAnnouncementsIndexRep = NodeCG.Replicant('barAnnouncementsIndex', 'wasd', {
+  defaultValue: 0, persistent: false
+});
+
 class AnnouncementsBar {
   view(vnode) {
     const annrep = vnode.attrs.barAnnouncementsRep;
-    console.log(annrep)
 
     let result = [m('.ann-status', `Current count: ${annrep.value.length}`)]
 
@@ -44,9 +47,9 @@ class AnnouncementsBar {
   }
 }
 
-NodeCG.waitForReplicants(barAnnouncementsRep).then(() => {
+NodeCG.waitForReplicants(barAnnouncementsRep, barAnnouncementsIndexRep).then(() => {
   m.mount(document.body, {
-    view: () => m(AnnouncementsBar, { barAnnouncementsRep: barAnnouncementsRep })
+    view: () => m(AnnouncementsBar, { barAnnouncementsRep: barAnnouncementsRep, barAnnouncementsIndexRep: barAnnouncementsIndexRep })
   });
 });
 
