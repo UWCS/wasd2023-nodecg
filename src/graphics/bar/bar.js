@@ -5,7 +5,6 @@ import fitty from 'fitty';
 
 import '../common.css';
 import './bar.css';
-import { ScrollText } from '../common/common.js';
 
 class Ticker extends EventTarget {
   constructor(intervalMs, event) {
@@ -34,7 +33,19 @@ class Ticker extends EventTarget {
 
 class CTA {
   view(vnode) {
-    return m(".cta", m(".cta-text", vnode.attrs.barAnnouncementsRep.value[0]));
+    return m(".cta", m(".cta-text", vnode.attrs.barAnnouncementsRep.value[vnode.attrs.barAnnouncementsIndexRep.value]));
+  }
+
+  choose_next(vnode) {
+    const indRep = vnode.attrs.barAnnouncementsIndexRep;
+    const rotation = vnode.attrs.barAnnouncementsRep.value;
+    console.log(rotation.length, rotation);
+
+    let value = indRep.value || 0;
+    value = (value+1) % rotation.length;
+    indRep.value = value;
+    console.log("Chosen", value, rotation[value]);
+    return rotation[value];
   }
 
   create_anim(vnode) {
@@ -51,6 +62,7 @@ class CTA {
   }
 
   oncreate(vnode) {
+    vnode.attrs.barAnnouncementsIndexRep.value = 0;
     this.create_anim(vnode);
 
     for (let child of vnode.dom.children) {
@@ -94,7 +106,7 @@ export default class BarComponent {
       ]),
       m('.bar-v-space'),
       m(CTA, {
-        hold: 5,
+        hold: 5, run: vnode.attrs.nextRun,
         barAnnouncementsRep: vnode.attrs.barAnnouncementsRep,
         barAnnouncementsIndexRep: vnode.attrs.barAnnouncementsIndexRep,
       }),
