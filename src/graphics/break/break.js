@@ -49,6 +49,22 @@ class Incentive {
   }
 }
 
+class Incentives {
+  view(vnode) {
+    const incentives = vnode.attrs.incentives.filter(i => i.active)
+      .sort((left, right) => left.endsAt < right.endsAt) // tmp
+      .map((i) => m(Incentive, { incentive: i, key: i.id }));
+
+    return m('.break-incentives-container', [
+      m('.break-right-label', 'Donation Incentives'),
+      m('.break-h-space'),
+      m('.break-incentives-list', ...incentives),
+    ]);
+  }
+}
+
+
+
 class PollOption {
   view(vnode) {
     let option = vnode.attrs.option;
@@ -92,21 +108,16 @@ class Poll {
   }
 }
 
-class Incentives {
+class Polls {
   view(vnode) {
-    const incentives = vnode.attrs.incentives.filter(i => i.active)
-      .sort((left, right) => left.endsAt < right.endsAt) // tmp
-      .map((i) => m(Incentive, { incentive: i, key: i.id }));
-
     const polls = vnode.attrs.polls.filter(i => i.active)
       .sort((left, right) => left.updatedAt < right.updatedAt) // tmp
       .map((p) => m(Poll, { poll: p, key: p.id }));
 
     return m('.break-incentives-container', [
+      m('.break-right-label', 'Donation Polls'),
       m('.break-h-space'),
-      m('.break-right-label', 'Donation Incentives'),
-      m('.break-h-space'),
-      m('.break-incentives-list', ...incentives, ...polls),
+      m('.break-incentives-list', ...polls),
     ]);
   }
 }
@@ -127,7 +138,10 @@ class BreakMultiBox {
       //   ]),
       // ]),
       m('.break-multibox-item', [
-        m(Incentives, { incentives: vnode.attrs.incentives, polls: vnode.attrs.polls }),
+        m(Incentives, { incentives: vnode.attrs.incentives }),
+      ]),
+      m('.break-multibox-item', [
+        m(Polls, { polls: vnode.attrs.polls }),
       ]),
     ]);
   }
@@ -195,7 +209,6 @@ class BreakComponent {
           ]),
           m('.break-v-space'),
           m('.break-right', [
-            m('.break-h-space'),
             m('.break-right-label', 'Coming Up Next'),
             m('.break-h-space'),
             ((vnode.attrs.nextRuns.length === 0)
