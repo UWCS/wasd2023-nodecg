@@ -45,12 +45,6 @@
         "title": "Countdown"
       },
       {
-        "file": "backgroundMode/index.html",
-        "width": 2,
-        "name": "backgroundMode",
-        "title": "Background Mode"
-      },
-      {
         "file": "cam2/index.html",
         "width": 3,
         "name": "cam2",
