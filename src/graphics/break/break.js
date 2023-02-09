@@ -62,7 +62,6 @@ class BreakComponent {
         incentives: vnode.attrs.incentives,
         polls: vnode.attrs.polls,
         barAnnouncementsRep: vnode.attrs.barAnnouncementsRep,
-        nextRun: vnode.attrs.nextRuns[0],
       }),
     ]);
   }

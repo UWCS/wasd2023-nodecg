@@ -34,15 +34,16 @@ class Ticker extends EventTarget {
 
 class CTA {
   view(vnode) {
+    this.vnode = vnode;
     return m(".cta", m(".cta-text", "Empty"));
   }
 
-  choose_next(vnode) {
-    const rotation = vnode.attrs.barAnnouncementsRep.value;
+  choose_next() {
+    const rotation = this.vnode.attrs.barAnnouncementsRep.value;
     const index = Math.floor(Math.random() * rotation.length);
     let choice = rotation[index];
     if (choice === '{{ next run }}') {
-      const run = vnode.attrs.run;
+      const run = this.vnode.attrs.nextRuns[0];
       if (run) {
         const stamp = new Date(get(run, 'scheduled', ''))
         const when = stamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
@@ -58,7 +59,7 @@ class CTA {
     const elem = vnode.dom.children[0];
     let tl = gsap.timeline({ repeat: -1 });
     tl.to(elem, { opacity: 0 });
-    tl.add(() => elem.innerText = this.choose_next(vnode));
+    tl.add(() => elem.innerText = this.choose_next());
     tl.to(elem, { opacity: 1 });
     tl.to({}, 5, {});
 
@@ -107,7 +108,7 @@ export default class BarComponent {
       ]),
       m('.bar-v-space'),
       m(CTA, {
-        hold: 5, run: vnode.attrs.nextRun,
+        hold: 5, nextRuns: vnode.attrs.nextRuns,
         barAnnouncementsRep: vnode.attrs.barAnnouncementsRep,
       }),
       m('.bar-v-space'),
