@@ -1,9 +1,11 @@
 import m from 'mithril';
 import gsap from 'gsap';
 import { get } from 'lodash';
+import Toastify from 'toastify-js'
 
 import '../common.css';
 import './break.css';
+import "toastify-js/src/toastify.css";
 
 // import BeachBackground from '../beach/beach.js';
 import CurrentSongComponent from '../currentSong/currentSong.js';
@@ -25,13 +27,19 @@ const replicants = {
   barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
 };
 
+function dono() {
+  // const node = document.getElementsByClassName("fullscreen")[0];
+  Toastify({ text: `Jeff donated £10`, duration: 100000, selector: "fullscreen",  }).showToast();
+}
+
 class BreakComponent {
   view(vnode) {
-    return m('.graphic .fullscreen', [
+    return m('.graphic .fullscreen #fullscreen', [
       // m(BeachBackground, { backgroundModeRep: vnode.attrs.backgroundModeRep }),
       m('.graphic .overlay', [
         m('.break-container', [
           m('.break-left', [
+            m("button", { onclick: dono }, "Toast" ),
             m(LogosComponent),
             m('.break-h-space'),
             m('.countdown-container', [
@@ -86,4 +94,17 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
 
 Object.values(replicants).forEach((rep) => {
   rep.on('change', () => { m.redraw(); });
+});
+
+replicants.polls.on("change", function(oldState, newState) { console.log("Change from", oldState, " to ", newState) });
+
+replicants.donations.on("change", function(oldvalue, newvalue) {
+  if (!newvalue) return
+  console.log("Change from", oldvalue, " to ", newvalue);
+
+  for (let i = 0; i < newvalue.length; i++) {
+    if (newvalue[i].shown) continue;
+    Toastify({ text: `${newvalue[i].name} donated £${newvalue[i].amount}`, duration: 3000 }).showToast();
+    nodecg.sendMessageToBundle('mark-donation-as-shown', 'nodecg-tiltify', newvalue[i]);
+  }
 });

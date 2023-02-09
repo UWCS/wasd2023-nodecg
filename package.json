@@ -26,7 +26,7 @@
   "nodecg": {
     "compatibleRange": "~1.9.0",
     "bundleDependencies": {
-      "nodecg-speedcontrol": "~2.4.0",
+      "nodecg-speedcontrol": "^2.4.0",
       "nodecg-tiltify": "~0.0.0",
       "ncg-spotify": "~1.6.0"
     },
@@ -34,7 +34,13 @@
       {
         "name": "specialEffectVideos",
         "title": "SpecialEffect Videos",
-        "allowedTypes": ["mp4", "mkv", "flv", "webm", "mov"]
+        "allowedTypes": [
+          "mp4",
+          "mkv",
+          "flv",
+          "webm",
+          "mov"
+        ]
       }
     ],
     "dashboardPanels": [
@@ -104,6 +110,7 @@
     "gsap": "^3.6.0",
     "lodash": "^4.17.20",
     "mithril": "^2.0.4",
-    "moment": "^2.29.1"
+    "moment": "^2.29.1",
+    "toastify-js": "^1.12.0"
   }
 }

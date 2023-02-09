@@ -54,6 +54,10 @@ body {
   height: 1080px;
 }
 
+.toastify {
+  position: absolute !important;
+}
+
 /* Common game screen formatting */
 .game {
   position: absolute;
