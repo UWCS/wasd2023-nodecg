@@ -8,6 +8,7 @@ const defaultCTAs = [
   'See the full schedule at warwickspeed.run/schedule',
   'WASD 2023 is raising money for SpecialEffect',
   'Donate now at warwickspeed.run/donate',
+  '{{ next run }}'
 ]
 
 const barAnnouncementsRep = NodeCG.Replicant('barAnnouncements', 'wasd', {

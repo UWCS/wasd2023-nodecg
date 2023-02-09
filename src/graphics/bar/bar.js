@@ -2,6 +2,7 @@ import m from 'mithril';
 import gsap from 'gsap';
 import moment from 'moment';
 import fitty from 'fitty';
+import { get } from 'lodash';
 
 import '../common.css';
 import './bar.css';
@@ -39,7 +40,17 @@ class CTA {
   choose_next(vnode) {
     const rotation = vnode.attrs.barAnnouncementsRep.value;
     const index = Math.floor(Math.random() * rotation.length);
-    return rotation[index] || 'Donate now at warwickspeed.run/donate';
+    let choice = rotation[index];
+    if (choice === '{{ next run }}') {
+      const run = vnode.attrs.run;
+      if (run) {
+        const stamp = new Date(get(run, 'scheduled', ''))
+        const when = `${stamp.getHours()}:${stamp.getMinutes()}`;
+        const user = get(run, 'teams[0].players', []).map(p => p.name).join(', ');
+        choice = `Up Next at ${when}: ${user} will be running ${run.game}: ${run.category}`;
+      }
+    }
+    return choice || 'Donate now at warwickspeed.run/donate';
   }
 
   create_anim(vnode) {
