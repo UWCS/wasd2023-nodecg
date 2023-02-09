@@ -7,10 +7,29 @@ import Toastify from 'toastify-js'
 
 import "toastify-js/src/toastify.css";
 
+function makeList(items) {
+    if (items.length == 0) return "";
+    if (items.length == 1) return items[0];
+    let result = items[0];
+    for (let i = 1; i < items.length-1; i++) {
+        result += `, ${items[i]}`;
+    }
+    return result + ` and ${items[items.length-1]}`;
+}
+
+export function runParse(run) {
+    const stamp = new Date(get(run, 'scheduled', ''))
+    const when = stamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    const teams = get(run, 'teams', []);
+    const names = teams.map(t => t.players.map(p => p.name)).flat();
+    const base = {system: "", release: ""}
+    return Object.assign(base, run, {when: when, runners: makeList(names)});
+}
+
 export function toast(content) {
     Toastify({
         text: content,
-        duration: 10000,
+        duration: 3000,
         selector: "fullscreen",
         position: "left",
         gravity: "bottom",
@@ -46,18 +65,12 @@ export class RunGameComponent {
 
 export class RunDetailsComponent {
     view(vnode) {
-        const run = vnode.attrs.run;
         const full = vnode.attrs.full;
-        const stamp = new Date(get(run, 'scheduled', ''))
-        const when = full ? stamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : "";
-        const user = full ? get(run, 'teams[0].players', []).map(p => p.name).join(', ') : "";
-        const category = get(run, 'category', '');
-        const system = get(run, 'system', '');
-        const release = get(run, 'release', '');
-        
-        let contents =  [user, when, category, system, release]
-        contents = contents.filter(i => i).join(`  /  `);
-        return m('.run-details-row', contents);
+
+        const run = runParse(vnode.attrs.run);
+        const contents =  full ? [run.runners, run.when, run.category, run.system, run.release] : [run.category, run.system, run.release]
+        const joined = contents.filter(i => i).join(`  /  `);
+        return m('.run-details-row', joined);
     }
 
     // onupdate(vnode) {

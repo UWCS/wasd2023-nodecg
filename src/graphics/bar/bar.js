@@ -7,6 +7,8 @@ import { get } from 'lodash';
 import '../common.css';
 import './bar.css';
 
+import { runParse } from '../common/common.js';
+
 class Ticker extends EventTarget {
   constructor(intervalMs, event) {
     super();
@@ -43,12 +45,10 @@ class CTA {
     const index = Math.floor(Math.random() * rotation.length);
     let choice = rotation[index];
     if (choice === '{{ next run }}') {
-      const run = this.vnode.attrs.nextRuns[0];
+      let run = this.vnode.attrs.nextRuns[0];
       if (run) {
-        const stamp = new Date(get(run, 'scheduled', ''))
-        const when = stamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
-        const user = get(run, 'teams[0].players', []).map(p => p.name).join(', ');
-        choice = `Up Next at ${when}: ${user} will be running ${run.game}: ${run.category}`;
+        run = runParse(run);
+        choice = `Up Next at ${run.when}: ${run.runners} will be running ${run.game}: ${run.category}`;
         if (run.game === "Setup") choice = null;
       }
     }
