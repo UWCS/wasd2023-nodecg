@@ -33,28 +33,24 @@ class Ticker extends EventTarget {
 
 class CTA {
   view(vnode) {
-    const index = Math.floor(Math.random() * vnode.attrs.barAnnouncementsRep.value.length);
-    return m(".cta", m(".cta-text", vnode.attrs.barAnnouncementsRep.value[index]));
+    return m(".cta", m(".cta-text", "Empty"));
   }
 
   choose_next(vnode) {
     const rotation = vnode.attrs.barAnnouncementsRep.value;
     const index = Math.floor(Math.random() * rotation.length);
-
-    return rotation[index];
+    return rotation[index] || 'Donate now at warwickspeed.run/donate';
   }
 
   create_anim(vnode) {
-    this.bar_ticker = new Ticker(2000);
-    this.bar_ticker.addEventListener("tick", () => {
-      if (this.anim) this.anim.kill();
-      gsap.to('.cta-text', { opacity: 0.0, duration: 0.25});
-      setTimeout(() => {
-        vnode.dom.children[0].innerHTML = this.choose_next(vnode);
-        gsap.to('.cta-text', { opacity: 1.0, duration: 0.25});
-      }, 250);
-    })
-    this.bar_ticker.start()
+    const elem = vnode.dom.children[0];
+    let tl = gsap.timeline({ repeat: -1 });
+    tl.to(elem, { opacity: 0 });
+    tl.add(() => elem.innerText = this.choose_next(vnode));
+    tl.to(elem, { opacity: 1 });
+    tl.to({}, 5, {});
+
+    this.anim = tl;
   }
 
   oncreate(vnode) {

@@ -1,4 +1,3 @@
-import { result } from 'lodash';
 import m from 'mithril';
 
 import '../common.css';
@@ -20,7 +19,7 @@ class AnnouncementsBar {
     const annrep = vnode.attrs.barAnnouncementsRep;
 
     // let result = [m('.ann-status', `Current: ${indrep.value}`)]
-
+    let result = [];
     for (let i=0; i < annrep.value.length; i++) {
       result.push(m('.ann-controls', [
         m('input.ann-input', {
