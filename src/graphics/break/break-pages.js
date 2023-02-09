@@ -41,7 +41,7 @@ export class Incentives {
       .sort((left, right) => left.endsAt < right.endsAt) // tmp
       .map((i) => m(Incentive, { incentive: i, key: i.id }));
 
-    return m('.break-incentives-container', [
+    return m('.break-page-container .break-incentives', [
       m('.break-right-label', 'Donation Incentives'),
       m('.break-h-space'),
       m('.break-incentives-list', ...incentives),
@@ -108,7 +108,7 @@ export class Polls {
       .sort((left, right) => left.updatedAt < right.updatedAt) // tmp
       .map((p) => m(Poll, { poll: p, key: p.id }));
 
-    return m('.break-incentives-container', [
+    return m('.break-page-container .break-polls', [
       m('.break-right-label', 'Donation Polls'),
       m('.break-h-space'),
       m('.break-incentives-list', ...polls),
@@ -129,7 +129,7 @@ export class BreakMultiBox {
   view(vnode) {
     return m('.break-multibox', [
       m('.break-multibox-item', [
-        m('.break-later-on', [
+        m('.break-page-container .break-later-on', [
           m('.break-right-label', 'Later On'),
           m('.break-h-space'),
           (
@@ -144,6 +144,16 @@ export class BreakMultiBox {
       ]),
       m('.break-multibox-item', [
         m(Polls, { polls: vnode.attrs.polls }),
+      ]),
+      m('.break-multibox-item', [
+        m(".break-page-container .break-desc", [
+          m('.break-right-label', 'WASD 2023 Description'),
+          m('.break-h-space'),
+          m(".break-next-run-container", [
+          m("p.body", "Started in 2016, Warwick's Awesome Speedruns and Demos (WASD) is a 2-day speedrunning event held annually at the University of Warwick. It is the largest student-run speedrunning event in the UK. "),
+          m("p.body", "Donations to the event are in support of SpecialEffect, a wonderful UK-based charity whose mission is to put fun and inclusion back into the lives of people with physical disabilities, by helping them to play video games. To date, the WASD events have raised over £6,000 for SpecialEffect!"),
+          m("p.body", "Find more information at warwickspeed.run or find us in Warwick Uni's SU Atrium or Twitch.")
+        ])]),
       ]),
     ]);
   }

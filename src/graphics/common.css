@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Montserrat';
-  src: url('./assets/Montserrat-Bold.ttf');
+  src: url('./assets/Montserrat-VariableFont_wght.ttf');
 }
 
 :root {
@@ -37,6 +37,7 @@ body {
   color: var(--text-color);
   font-family: 'Montserrat';
   text-shadow: -3px 3px 3 #00000080;
+  font-weight: bold;
 }
 
 .graphic {
