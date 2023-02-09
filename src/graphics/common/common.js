@@ -37,12 +37,18 @@ export function toast(content) {
     }).showToast();
 }
 
+const shownDonosRep = NodeCG.Replicant('shownDonos', 'wasd', {
+    defaultValue: {}, persistent: true
+  });
+
 export function setupNotifs(donoRep) {
     donoRep.on("change", function (oldvalue, newvalue) {
         if (!newvalue) return
         
         for (let i = 0; i < newvalue.length; i++) {
-            if (newvalue[i].shown) continue;
+            console.log(newvalue[i].name, newvalue[i].shown)
+            if (newvalue[i].shown || shownDonosRep.value[newvalue[i].id] !== undefined) continue;
+            shownDonosRep.value[newvalue[i].id] = newvalue[i];
             toast(`${newvalue[i].name} donated £${newvalue[i].amount}`);
             nodecg.sendMessageToBundle('mark-donation-as-shown', 'nodecg-tiltify', newvalue[i]);
         }
