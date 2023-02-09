@@ -15,16 +15,11 @@ const barAnnouncementsRep = NodeCG.Replicant('barAnnouncements', 'wasd', {
   defaultValue: [...defaultCTAs], persistent: true
 });
 
-const barAnnouncementsIndexRep = NodeCG.Replicant('barAnnouncementsIndex', 'wasd', {
-  defaultValue: 0, persistent: false
-});
-
 class AnnouncementsBar {
   view(vnode) {
     const annrep = vnode.attrs.barAnnouncementsRep;
-    const indrep = vnode.attrs.barAnnouncementsIndexRep;
 
-    let result = [m('.ann-status', `Current: ${indrep.value}`)]
+    // let result = [m('.ann-status', `Current: ${indrep.value}`)]
 
     for (let i=0; i < annrep.value.length; i++) {
       result.push(m('.ann-controls', [
@@ -48,15 +43,11 @@ class AnnouncementsBar {
   }
 }
 
-NodeCG.waitForReplicants(barAnnouncementsRep, barAnnouncementsIndexRep).then(() => {
+NodeCG.waitForReplicants(barAnnouncementsRep).then(() => {
   barAnnouncementsRep.value = barAnnouncementsRep.value || [...defaultCTAs];
   m.mount(document.body, {
-    view: () => m(AnnouncementsBar, { barAnnouncementsRep: barAnnouncementsRep, barAnnouncementsIndexRep: barAnnouncementsIndexRep })
+    view: () => m(AnnouncementsBar, { barAnnouncementsRep: barAnnouncementsRep })
   });
 });
 
-barAnnouncementsRep.on('change', () => { 
-  
-  m.redraw(); 
-});
-// barAnnouncementsIndexRep.on('change', () => { m.redraw(); });
+barAnnouncementsRep.on('change', () => { m.redraw(); });

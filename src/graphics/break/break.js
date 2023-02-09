@@ -23,7 +23,6 @@ const replicants = {
   polls: NodeCG.Replicant('donationpolls', 'nodecg-tiltify'),
   donations: NodeCG.Replicant('donations', 'nodecg-tiltify'),
   barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
-  barAnnouncementsIndexRep: NodeCG.Replicant('barAnnouncementsIndex', 'wasd'),
 };
 
 class BreakComponent {
@@ -62,7 +61,6 @@ class BreakComponent {
         incentives: vnode.attrs.incentives,
         polls: vnode.attrs.polls,
         barAnnouncementsRep: vnode.attrs.barAnnouncementsRep,
-        barAnnouncementsIndexRep: vnode.attrs.barAnnouncementsIndexRep,
         nextRun: vnode.attrs.nextRuns[0],
       }),
     ]);
@@ -81,7 +79,6 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         incentives: replicants.challenges.value,
         polls: replicants.polls.value,
         barAnnouncementsRep: replicants.barAnnouncementsRep,
-        barAnnouncementsIndexRep: replicants.barAnnouncementsIndexRep,
       });
     }
   });

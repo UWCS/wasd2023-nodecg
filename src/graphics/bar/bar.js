@@ -33,19 +33,15 @@ class Ticker extends EventTarget {
 
 class CTA {
   view(vnode) {
-    return m(".cta", m(".cta-text", vnode.attrs.barAnnouncementsRep.value[vnode.attrs.barAnnouncementsIndexRep.value]));
+    const index = Math.floor(Math.random() * vnode.attrs.barAnnouncementsRep.value.length);
+    return m(".cta", m(".cta-text", vnode.attrs.barAnnouncementsRep.value[index]));
   }
 
   choose_next(vnode) {
-    const indRep = vnode.attrs.barAnnouncementsIndexRep;
     const rotation = vnode.attrs.barAnnouncementsRep.value;
-    console.log(rotation.length, rotation);
+    const index = Math.floor(Math.random() * rotation.length);
 
-    let value = indRep.value || 0;
-    value = (value+1) % rotation.length;
-    indRep.value = value;
-    console.log("Chosen", value, rotation[value]);
-    return rotation[value];
+    return rotation[index];
   }
 
   create_anim(vnode) {
@@ -62,14 +58,11 @@ class CTA {
   }
 
   oncreate(vnode) {
-    vnode.attrs.barAnnouncementsIndexRep.value = 0;
     this.create_anim(vnode);
 
     for (let child of vnode.dom.children) {
       fitty(child, { maxSize: 36 });
     }
-
-    // vnode.attrs.barAnnouncementsRep.on("change", () => { console.log("change"); this.create_anim(vnode) });
   } 
 
   onupdate(vnode) {
@@ -108,7 +101,6 @@ export default class BarComponent {
       m(CTA, {
         hold: 5, run: vnode.attrs.nextRun,
         barAnnouncementsRep: vnode.attrs.barAnnouncementsRep,
-        barAnnouncementsIndexRep: vnode.attrs.barAnnouncementsIndexRep,
       }),
       m('.bar-v-space'),
       m('span', moment().format('HH:mm')),
