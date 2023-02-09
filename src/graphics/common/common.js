@@ -3,6 +3,33 @@ import m from 'mithril';
 import { get } from 'lodash';
 import gsap from 'gsap';
 
+import Toastify from 'toastify-js'
+
+import "toastify-js/src/toastify.css";
+
+export function toast(content) {
+    Toastify({
+        text: content,
+        duration: 10000,
+        selector: "fullscreen",
+        position: "left",
+        gravity: "bottom",
+        offset: { x: 0, y: 75 }
+    }).showToast();
+}
+
+export function setupNotifs(donoRep) {
+    donoRep.on("change", function (oldvalue, newvalue) {
+        if (!newvalue) return
+        
+        for (let i = 0; i < newvalue.length; i++) {
+            if (newvalue[i].shown) continue;
+            toast(`${newvalue[i].name} donated £${newvalue[i].amount}`);
+            nodecg.sendMessageToBundle('mark-donation-as-shown', 'nodecg-tiltify', newvalue[i]);
+        }
+    });
+}
+
 export class RunGameComponent {
     view(vnode) {
         return m('.run-game', String(vnode.attrs.game));
