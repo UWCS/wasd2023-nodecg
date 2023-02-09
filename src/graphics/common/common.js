@@ -22,7 +22,7 @@ export class RunDetailsComponent {
         const run = vnode.attrs.run;
         const full = vnode.attrs.full;
         const stamp = new Date(get(run, 'scheduled', ''))
-        const when = full ? `${stamp.getHours()}:${stamp.getMinutes()}` : "";
+        const when = full ? stamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) : "";
         const user = full ? get(run, 'teams[0].players', []).map(p => p.name).join(', ') : "";
         const category = get(run, 'category', '');
         const system = get(run, 'system', '');

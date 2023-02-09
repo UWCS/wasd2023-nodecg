@@ -45,9 +45,10 @@ class CTA {
       const run = vnode.attrs.run;
       if (run) {
         const stamp = new Date(get(run, 'scheduled', ''))
-        const when = `${stamp.getHours()}:${stamp.getMinutes()}`;
+        const when = stamp.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
         const user = get(run, 'teams[0].players', []).map(p => p.name).join(', ');
         choice = `Up Next at ${when}: ${user} will be running ${run.game}: ${run.category}`;
+        if (run.game === "Setup") choice = null;
       }
     }
     return choice || 'Donate now at warwickspeed.run/donate';
