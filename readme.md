@@ -56,17 +56,18 @@ nodecg setup
 
 # Install bundles
 nodecg install speedcontrol/nodecg-speedcontrol
-nodecg install daniellockard/nodecg-tiltify
+nodecg install ericthelemur/nodecg-tiltify
 nodecg install EwanLyon/ncg-spotify
 
 # Install this bundle 
-git clone https://github.com/ericthelemur/wasd2022-frontend
+cd bundles
+git clone https://github.com/uwcs/wasd2023-nodecg
 ```
 
 ### build
 
 ```shell
-cd nodecg/bundles/wasd2022-frontend
+cd wasd2023-nodecg
 npm ci
 npm run build
 ```
@@ -89,6 +90,9 @@ In `wasd2022-frontend`:
 ```shell
 npm run start
 ```
+
+### dev
+Run `npm run start` to host, and `npm run watch` to incrementally build.
 
 ## license
 
