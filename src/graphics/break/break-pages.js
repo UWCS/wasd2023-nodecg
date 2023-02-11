@@ -37,14 +37,15 @@ class Incentive {
 
 export class Incentives {
   view(vnode) {
-    const incentives = vnode.attrs.incentives.filter(i => i.active)
+    const incentives = vnode.attrs.incentives || []
+    const incentive_objs = incentives.filter(i => i.active)
       .sort((left, right) => left.endsAt < right.endsAt) // tmp
       .map((i) => m(Incentive, { incentive: i, key: i.id }));
 
     return m('.break-page-container .break-incentives', [
       m('.break-right-label', 'Donation Incentives'),
       m('.break-h-space'),
-      m('.break-incentives-list', ...incentives),
+      m('.break-incentives-list', ...incentive_objs),
     ]);
   }
 }
@@ -104,14 +105,15 @@ class Poll {
 
 export class Polls {
   view(vnode) {
-    const polls = vnode.attrs.polls.filter(i => i.active)
+    const polls = vnode.attrs.polls || []
+    const poll_objs = polls.filter(i => i.active)
       .sort((left, right) => left.updatedAt < right.updatedAt) // tmp
       .map((p) => m(Poll, { poll: p, key: p.id }));
 
     return m('.break-page-container .break-polls', [
       m('.break-right-label', 'Donation Polls'),
       m('.break-h-space'),
-      m('.break-incentives-list', ...polls),
+      m('.break-incentives-list', ...poll_objs),
     ]);
   }
 }
