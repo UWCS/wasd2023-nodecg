@@ -159,9 +159,9 @@ function filterMS(mss, total) {
 
 export class Milestones {
   view(vnode) {
-    console.log("MS", vnode.attrs.milestones);
-    const milestones = vnode.attrs.milestones || [];
-    const sortedMS = filterMS(milestones.sort((left, right) => left.amount < right.amount), vnode.attrs.total);
+    const milestones = vnode.attrs.milestones ? [...vnode.attrs.milestones] : [];
+    milestones.sort((left, right) => { left.amount < right.amount } );
+    const sortedMS = filterMS(milestones, vnode.attrs.total);
     const ms_objs = sortedMS.map((i) => m(Milestone, { milestone: i, key: i.id, total: vnode.attrs.total }));
 
     return m('.break-page-container .break-incentives', [
@@ -200,6 +200,9 @@ export class BreakMultiBox {
       ]),
       m('.break-multibox-item', [
         m(Polls, { polls: vnode.attrs.polls }),
+      ]),
+      m('.break-multibox-item', [
+        m(Milestones, { milestones: vnode.attrs.milestones, total: vnode.attrs.total }),
       ]),
       m('.break-multibox-item', [
         m(".break-page-container .break-desc", [
