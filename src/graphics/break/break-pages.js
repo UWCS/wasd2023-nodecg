@@ -118,6 +118,60 @@ export class Polls {
   }
 }
 
+class Milestone {
+  view(vnode) {
+    const milestone = vnode.attrs.milestone;
+    const total = vnode.attrs.total;
+    const content = total > milestone.amount ? `Milestone Hit! (£${milestone.amount}/${milestone.amount})` : `£${total} / £${milestone.amount}`;
+    return m('.break-incentive-container', [
+      m('.break-incentive-name', name),
+      m('.break-incentive-bar', [
+        m('.break-incentive-progress'),
+        m('.break-incentive-amount', content),
+      ]),
+    ]);
+  }
+
+  onupdate(vnode) {
+    const bar = vnode.dom.getElementsByClassName("break-incentive-progress")[0];
+
+    const current = Number(vnode.attrs.total);
+    const max = Number(vnode.attrs.milestone.amount);
+
+    const width = Math.min(((current / max) * 100), 100);
+
+    gsap.to(bar, { width: `${width}%`, ease: 'expo.out', duration: 3 });
+
+    fitty(vnode.dom.children[0], { maxSize: vnode.attrs.size || 30, multiline: false });
+  }
+
+  oncreate(vnode) {
+      fitty(vnode.dom.children[0], { maxSize: vnode.attrs.size || 30, multiline: false });
+  }
+}
+
+function filterMS(mss, total) {
+  console.log(mss, total);
+  const ind = mss.findIndex((m) => m.amount > total);
+  if (ind <= 0) return mss;
+  return mss.splice(ind);
+}
+
+export class Milestones {
+  view(vnode) {
+    console.log("MS", vnode.attrs.milestones);
+    const milestones = vnode.attrs.milestones || [];
+    const sortedMS = filterMS(milestones.sort((left, right) => left.amount < right.amount), vnode.attrs.total);
+    const ms_objs = sortedMS.map((i) => m(Milestone, { milestone: i, key: i.id, total: vnode.attrs.total }));
+
+    return m('.break-page-container .break-incentives', [
+      m('.break-right-label', 'Donation Milestones'),
+      m('.break-h-space'),
+      m('.break-incentives-list', ...ms_objs),
+    ]);
+  }
+}
+
 export class Run {
   view(vnode) {
     return m('.break-next-run-container', [

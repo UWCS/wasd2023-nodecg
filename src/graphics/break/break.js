@@ -22,6 +22,7 @@ const replicants = {
   challenges: NodeCG.Replicant('challenges', 'nodecg-tiltify'),
   polls: NodeCG.Replicant('donationpolls', 'nodecg-tiltify'),
   donations: NodeCG.Replicant('donations', 'nodecg-tiltify'),
+  milestones: NodeCG.Replicant('milestones', 'nodecg-tiltify'),
   barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
 };
 
@@ -52,6 +53,8 @@ class BreakComponent {
               nextRuns: vnode.attrs.nextRuns,
               incentives: vnode.attrs.incentives,
               polls: vnode.attrs.polls,
+              milestones: vnode.attrs.milestones,
+              total: vnode.attrs.total,
             }),
           ]),
         ]),
@@ -78,6 +81,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         nextRuns: nextRuns(replicants.run.value, replicants.runArray.value),
         incentives: replicants.challenges.value,
         polls: replicants.polls.value,
+        milestones: replicants.milestones.value,
         barAnnouncementsRep: replicants.barAnnouncementsRep,
       });
     }
