@@ -35,3 +35,8 @@
   min-width: 3px;
   background-color: var(--spacer-color);
 }
+
+.light {
+  font-size: 20px;
+  font-weight: 500;
+}

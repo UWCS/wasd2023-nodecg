@@ -220,11 +220,7 @@
   font-size: 26px;
 }
 
-.break-desc .body {
+.light {
   font-size: 30px;
   font-weight: 500;
-}
-
-.break-right .break-desc .body {
-  font-size: 20px;
 }

@@ -112,6 +112,7 @@ export class Polls {
 
     return m('.break-page-container .break-polls', [
       m('.break-right-label', 'Donation Polls'),
+      m('.break-right-label .light', 'Unfortunately, Tiltify broke their poll API a few days ago, not much we can do, soz :/'),
       m('.break-h-space'),
       m('.break-incentives-list', ...poll_objs),
     ]);
@@ -209,9 +210,9 @@ export class BreakMultiBox {
           m('.break-right-label', 'WASD 2023 Description'),
           m('.break-h-space'),
           m(".break-next-run-container", [
-          m("p.body", "Started in 2016, Warwick's Awesome Speedruns and Demos (WASD) is a 2-day speedrunning event held annually at the University of Warwick. It is the largest student-run speedrunning event in the UK. "),
-          m("p.body", "Donations to the event are in support of SpecialEffect, a wonderful UK-based charity whose mission is to put fun and inclusion back into the lives of people with physical disabilities, by helping them to play video games. To date, the WASD events have raised over £6,000 for SpecialEffect!"),
-          m("p.body", "Find more information at warwickspeed.run or find us in Warwick Uni's SU Atrium or Twitch.")
+          m("p.light", "Started in 2016, Warwick's Awesome Speedruns and Demos (WASD) is a 2-day speedrunning event held annually at the University of Warwick. It is the largest student-run speedrunning event in the UK. "),
+          m("p.light", "Donations to the event are in support of SpecialEffect, a wonderful UK-based charity whose mission is to put fun and inclusion back into the lives of people with physical disabilities, by helping them to play video games. To date, the WASD events have raised over £6,000 for SpecialEffect!"),
+          m("p.light", "Find more information at warwickspeed.run or find us in Warwick Uni's SU Atrium or Twitch.")
         ])]),
       ]),
     ]);
@@ -223,7 +224,7 @@ export class BreakMultiBox {
 
     const tl = gsap.timeline({ repeat: -1, paused: true });
 
-    const hold = 10;
+    const hold = 7;
 
     boxes.forEach((box) => {
       gsap.set(box, { opacity: 0 });
