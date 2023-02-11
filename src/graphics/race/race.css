@@ -1,0 +1,90 @@
+/* .graphic {
+    background-image: url('../assets/wasd-bg-16-9.png');
+} */
+
+
+/* Common game screen formatting */
+
+.game {
+    width: 1000px;
+    aspect-ratio: 16 / 9;
+    height: auto;
+}
+
+.game2, .fakecam1, .fakecam2 {
+    top: auto;
+    left: auto;
+    right: auto;
+    bottom: auto;
+
+    border: 5px solid var(--spacer-color);
+}
+
+.game2 {
+    position: absolute;
+    bottom: 0px; left: 0px;
+  }
+
+  .fakecam1, .fakecam2 {
+    height: 350px;
+    width: 400px;
+    /* margin: 25px; */
+  }
+.fakecam1 {
+    right: 0px;
+    bottom: 100px;
+}
+
+.left {
+    height: 400px;
+    left: 450px;
+    width: 425px;
+    top: 25px;
+}
+
+.runners-container {
+    width: 350px !important;
+    margin: 25px !important;
+}
+
+.run2 {
+    margin:  25px;
+    position:  absolute;
+    right:  25px;
+    bottom: -25px;
+    width: 350px;
+}
+
+.run2 > .runners-container {
+    margin: 0;
+    padding: 0;
+}
+
+.fakecam2 {
+    top: 100px;
+    left: 0px;
+}
+  .bottom {
+    width: 450px;
+    flex-direction: column;
+    bottom: 0px;
+    height: 400px;
+    right: 425px;
+  }
+
+  .run-details, .run-timing {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  
+    width: 95%;
+    flex-grow: 0;
+    padding: 20px 0;
+  
+    border-width: 2px;
+    border-style: solid none none none;
+    /* Cursed 75% width border */
+    border-image: linear-gradient(to right, transparent 12%, white 12%, white 88%, transparent 88%) 1;
+  }
+  
