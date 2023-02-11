@@ -124,7 +124,7 @@ class Milestone {
     const total = vnode.attrs.total;
     const content = total > milestone.amount ? `Milestone Hit! (£${milestone.amount}/${milestone.amount})` : `£${total} / £${milestone.amount}`;
     return m('.break-incentive-container', [
-      m('.break-incentive-name', name),
+      m('.break-incentive-name', milestone.name),
       m('.break-incentive-bar', [
         m('.break-incentive-progress'),
         m('.break-incentive-amount', content),
@@ -151,10 +151,10 @@ class Milestone {
 }
 
 function filterMS(mss, total) {
-  console.log(mss, total);
-  const ind = mss.findIndex((m) => m.amount > total);
+  // Display latest passed milestone and subsequent
+  const ind = mss.findIndex((m) => m.amount >= total);
   if (ind <= 0) return mss;
-  return mss.splice(ind);
+  return mss.slice(ind-1);
 }
 
 export class Milestones {
