@@ -20,13 +20,12 @@ const replicants = {
   donations: NodeCG.Replicant('donations', 'nodecg-tiltify'),
   challenges: NodeCG.Replicant('challenges', 'nodecg-tiltify'),
   polls: NodeCG.Replicant('donationpolls', 'nodecg-tiltify'),
+  milestones: NodeCG.Replicant('milestones', 'nodecg-tiltify'),
   barAnnouncementsRep: NodeCG.Replicant('barAnnouncements', 'wasd'),
 };
 
 class CouchScreenComponent {
   view(vnode) {
-    const run = vnode.attrs.nextRuns[0];
-
     return m('.graphic .fullscreen #fullscreen', [
       // m(BeachBackground, { backgroundModeRep: vnode.attrs.backgroundModeRep }),
       m('.graphic .overlay', [
@@ -42,6 +41,8 @@ class CouchScreenComponent {
               nextRuns: vnode.attrs.nextRuns,
               incentives: vnode.attrs.incentives,
               polls: vnode.attrs.polls,
+              milestones: vnode.attrs.milestones,
+              total: vnode.attrs.total,
               multiline_games: true,
             }),
           ]),
@@ -69,6 +70,7 @@ NodeCG.waitForReplicants(...Object.values(replicants)).then(() => {
         nextRuns: nextRuns(replicants.run.value, replicants.runArray.value),
         incentives: replicants.challenges.value,
         polls: replicants.polls.value,
+        milestones: replicants.milestones.value,
         barAnnouncementsRep: replicants.barAnnouncementsRep,
       });
     }

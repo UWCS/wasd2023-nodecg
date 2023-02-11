@@ -121,7 +121,7 @@ export class Polls {
 class Milestone {
   view(vnode) {
     const milestone = vnode.attrs.milestone;
-    const total = vnode.attrs.total;
+    const total = vnode.attrs.total || 0;
     const content = total > milestone.amount ? `Milestone Hit! (£${milestone.amount}/${milestone.amount})` : `£${total} / £${milestone.amount}`;
     return m('.break-incentive-container', [
       m('.break-incentive-name', milestone.name),
